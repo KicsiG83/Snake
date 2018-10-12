@@ -32,8 +32,8 @@ public class TestBoard {
 		int n = splitedtest.length;
 		int m = splitedtest[0].length();
 		char[][] result = new char[n][m];
-		for(int i=0;i<n;i++) {
-			for(int j=0;j<m;j++) {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
 				result[i][j] = splitedtest[i].charAt(j);
 			}
 		}

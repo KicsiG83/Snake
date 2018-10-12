@@ -2,11 +2,12 @@ package hu.ak_akademia.snake.view;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import hu.ak_akademia.snake.control.SnakeController;
 import hu.ak_akademia.snake.model.Direction;
 
-public class SnakeListener extends KeyAdapter {
+public class SnakeListener extends KeyAdapter implements KeyListener {
 	private SnakeController sc;
 
 	public SnakeListener(SnakeController sc) {
@@ -14,32 +15,20 @@ public class SnakeListener extends KeyAdapter {
 	}
 	
 	@Override
-	public void keyTyped(KeyEvent e) {
+	public void keyPressed(KeyEvent e) {
 		Direction lastDir = sc.getDir();
 		if (e == null) {
 			return;
 		}
 		switch (e.getExtendedKeyCode()) {
 		case KeyEvent.VK_LEFT:
-			if(lastDir==Direction.LEFT) {
-				sc.setDir(Direction.DOWN);
-			} else if(lastDir==Direction.UP) {
+			if(lastDir==Direction.UP || lastDir==Direction.DOWN) {
 				sc.setDir(Direction.LEFT);
-			} else if(lastDir==Direction.RIGHT) {
-				sc.setDir(Direction.UP);
-			} else if(lastDir==Direction.DOWN) {
-				sc.setDir(Direction.RIGHT);
 			}
 			break;
 		case KeyEvent.VK_RIGHT:
-			if(lastDir==Direction.LEFT) {
-				sc.setDir(Direction.UP);
-			} else if(lastDir==Direction.UP) {
+			 if(lastDir==Direction.UP || lastDir==Direction.DOWN) {
 				sc.setDir(Direction.RIGHT);
-			} else if(lastDir==Direction.RIGHT) {
-				sc.setDir(Direction.DOWN);
-			} else if(lastDir==Direction.DOWN) {
-				sc.setDir(Direction.LEFT);
 			}
 			break;
 		case KeyEvent.VK_UP:

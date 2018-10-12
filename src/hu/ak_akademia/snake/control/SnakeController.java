@@ -4,7 +4,11 @@ import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import hu.ak_akademia.snake.model.*;
+import hu.ak_akademia.snake.model.Board;
+import hu.ak_akademia.snake.model.Direction;
+import hu.ak_akademia.snake.model.FieldState;
+import hu.ak_akademia.snake.model.Snake;
+import hu.ak_akademia.snake.model.SnakePiece;
 
 public class SnakeController implements ActionListener {
 	private Snake snake;
@@ -87,14 +91,15 @@ public class SnakeController implements ActionListener {
 	}
 
 	private void feed() {
+		
 	}
 
 	private void gameOver() {
+		
 	}
 
 	private FieldState checkNextField() {
 		int[] nextFieldCoordinates = getNextFieldCoors();
 		return board.getFields()[nextFieldCoordinates[0]][nextFieldCoordinates[1]].getState();
 	}
-
 }
