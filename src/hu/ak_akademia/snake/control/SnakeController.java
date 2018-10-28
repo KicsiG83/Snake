@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
+import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.Snake;
 import hu.ak_akademia.snake.model.SnakePiece;
 
@@ -14,6 +15,7 @@ public class SnakeController implements ActionListener {
 	private Snake snake;
 	private Board board;
 	private Direction dir = Direction.RIGHT;
+	private Player player;
 	TextArea screen;
 
 	public SnakeController(Snake snake, Board board, TextArea screen) {
@@ -91,6 +93,8 @@ public class SnakeController implements ActionListener {
 	}
 
 	private void feed() {
+		player.setPoint(player.getPoint()+1);
+		snake.eat();
 		
 	}
 

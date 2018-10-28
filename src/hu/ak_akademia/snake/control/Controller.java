@@ -5,7 +5,7 @@ import javax.swing.*;
 
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Snake;
-import hu.ak_akademia.snake.model.TestBoard;
+import hu.ak_akademia.snake.model.ReadBoardFromFile;
 import hu.ak_akademia.snake.view.SnakeListener;
 
 public class Controller {
@@ -14,7 +14,7 @@ public class Controller {
 		JFrame snakeFrame = new JFrame("A&K - Snake");
 		TextArea screen = new TextArea();
 		Snake snake = new Snake(3);
-		Board field = new Board(TestBoard.getTestMap());
+		Board field = new Board(ReadBoardFromFile.getBoard());
 		SnakeController sc = new SnakeController(snake, field, screen);
 		Timer timer = new Timer(100, sc);
 		SnakeListener listener= new SnakeListener(sc);
