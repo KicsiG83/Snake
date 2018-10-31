@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
-import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.Snake;
 import hu.ak_akademia.snake.model.SnakePiece;
+import hu.ak_akademia.snake.model.Player;
 
 public class SnakeController implements ActionListener {
 	private Snake snake;
@@ -49,7 +49,12 @@ public class SnakeController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		int lastX = snake.getHead().getCoorX();
+		int lastY = snake.getHead().getCoorY();
 		move();
+		if(lastX == snake.getHead().getCoorX() && lastY == snake.getHead().getCoorY()) {
+			gameOver();
+		}
 		screen.setText(board.toString());
 	}
 
@@ -105,7 +110,7 @@ public class SnakeController implements ActionListener {
 	}
 
 	private void gameOver() {
-		
+		System.out.println("NYEKK");
 	}
 
 	private FieldState checkNextField() {
