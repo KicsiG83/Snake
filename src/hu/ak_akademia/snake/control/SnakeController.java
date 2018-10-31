@@ -16,12 +16,15 @@ public class SnakeController implements ActionListener {
 	private Board board;
 	private Direction dir = Direction.RIGHT;
 	private Player player;
+	private FoodFactory food;
 	TextArea screen;
 
 	public SnakeController(Snake snake, Board board, TextArea screen) {
 		this.snake = snake;
 		this.board = board;
 		this.screen = screen;
+		food = new FoodFactory(board);
+		player = new Player();
 		int startRow = board.getFields().length / 2;
 		int startColoum = snake.getLength() + 2;
 	
@@ -33,6 +36,7 @@ public class SnakeController implements ActionListener {
 			startColoum--;
 			lastPiece = lastPiece.getPointer();
 		}
+		food.placeFood();
 	}
 
 	public void setDir(Direction dir) {
@@ -60,6 +64,7 @@ public class SnakeController implements ActionListener {
 			new SnakeMover(snake,board).autoMove(nextFieldCoors);
 			break;
 		case COLLECTABLE:
+			new SnakeMover(snake,board).autoMove(nextFieldCoors);
 			feed();
 			break;
 		case INUSE:
@@ -95,6 +100,7 @@ public class SnakeController implements ActionListener {
 	private void feed() {
 		player.setPoint(player.getPoint()+1);
 		snake.eat();
+		food.placeFood();
 		
 	}
 
