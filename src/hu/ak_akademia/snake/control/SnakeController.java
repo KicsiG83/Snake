@@ -12,11 +12,11 @@ import hu.ak_akademia.snake.model.Snake;
 import hu.ak_akademia.snake.model.SnakePiece;
 
 public class SnakeController implements ActionListener {
-	private Snake snake;
-	private Board board;
-	private Direction dir = Direction.RIGHT;
-	private Player player;
-	private FoodFactory food;
+	protected Snake snake;
+	protected Board board;
+	protected Direction dir = Direction.RIGHT;
+	protected Player player;
+	protected FoodFactory food;
 	TextArea screen;
 
 	public SnakeController(Snake snake, Board board, TextArea screen) {
@@ -60,12 +60,10 @@ public class SnakeController implements ActionListener {
 	private void move() {
 		int[] nextFieldCoors = getNextFieldCoors();
 		switch (checkNextField()) {
+		case COLLECTABLE:
+			feed();
 		case FREE:
 			new SnakeMover(snake,board).autoMove(nextFieldCoors);
-			break;
-		case COLLECTABLE:
-			new SnakeMover(snake,board).autoMove(nextFieldCoors);
-			feed();
 			break;
 		case INUSE:
 			gameOver();
@@ -105,7 +103,6 @@ public class SnakeController implements ActionListener {
 	}
 
 	private void gameOver() {
-		
 	}
 
 	private FieldState checkNextField() {

@@ -4,11 +4,16 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class ReadBoardFromFile {
-	public static String test = "";
+	private String test = "";
+	private String pathToFile;
+	
+	public ReadBoardFromFile(String pathToFile) {
+		this.pathToFile = pathToFile;
+	}
 
-	public static String ReadEntireFileIntoAStringCharByChar() throws IOException {
+	private String ReadEntireFileIntoAStringCharByChar() throws IOException {
 
-		FileReader fileReader = new FileReader("resources\\testBoard.txt");
+		FileReader fileReader = new FileReader(pathToFile);
 		String fileContents = "";
 		int i;
 		while ((i = fileReader.read()) != -1) {
@@ -18,7 +23,7 @@ public class ReadBoardFromFile {
 		return fileContents;
 	}
 
-	public static char[][] getBoard() {
+	public char[][] getBoard() {
 		String str = "";
 		try {
 			str = ReadEntireFileIntoAStringCharByChar();

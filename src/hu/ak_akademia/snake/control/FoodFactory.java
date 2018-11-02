@@ -10,6 +10,7 @@ import hu.ak_akademia.snake.model.FieldState;
 
 public class FoodFactory {
 	private Board board;
+	private int[] coorsOfLastFood = new int[2];
 	public FoodFactory(Board board) {
 		this.board = board;
 	}
@@ -22,6 +23,8 @@ public class FoodFactory {
 		
 		Integer[] rndCoors = coordinatesOfFreeFileds.get(rndIndex);
 		board.getFields()[rndCoors[0]][rndCoors[1]] = BoardItem.FOOD;
+		coorsOfLastFood[0]=rndCoors[0];
+		coorsOfLastFood[1]=rndCoors[1];
 	}
 	
 	private List<Integer[]> getListOfFreeFields() {
@@ -38,4 +41,11 @@ public class FoodFactory {
 		}
 		return result;
 	}
+
+	public int[] getCoorsOfLastFood() {
+		return coorsOfLastFood;
+	}
+	
+	
+	
 }

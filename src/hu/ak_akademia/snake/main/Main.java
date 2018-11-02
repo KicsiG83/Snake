@@ -10,7 +10,8 @@ public class Main {
 
 	private void run() {
 		Controller controller = new Controller();
-		controller.start();
+//		controller.start();
+		controller.startDemo();
 		/**
 		 * Todo
 		 */
