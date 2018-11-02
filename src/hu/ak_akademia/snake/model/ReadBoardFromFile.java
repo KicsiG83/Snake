@@ -6,9 +6,9 @@ import java.io.IOException;
 public class ReadBoardFromFile {
 	public static String test = "";
 
-	public static String ReadEntireFileIntoAStringCharByChar() throws IOException {
-
-		FileReader fileReader = new FileReader("resources\\testBoard.txt");
+	public static String ReadEntireFileIntoAStringCharByChar(String stringPath) throws IOException {
+		//"resources/testBoard.txt"
+		FileReader fileReader = new FileReader(stringPath);
 		String fileContents = "";
 		int i;
 		while ((i = fileReader.read()) != -1) {
@@ -18,12 +18,11 @@ public class ReadBoardFromFile {
 		return fileContents;
 	}
 
-	public static char[][] getBoard() {
+	public static char[][] getBoard(String stringPath) {
 		String str = "";
 		try {
-			str = ReadEntireFileIntoAStringCharByChar();
+			str = ReadEntireFileIntoAStringCharByChar(stringPath);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		test = str;
