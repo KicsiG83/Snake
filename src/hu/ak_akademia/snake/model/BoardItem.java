@@ -5,7 +5,7 @@ public enum BoardItem {
 	SNAKE_HEAD('O', FieldState.INUSE),
 	SNAKE_BODY('%', FieldState.INUSE),
 	HORIZONTAL_WALL('─',FieldState.INUSE),
-	VERTICAL_WALL('|',FieldState.INUSE),
+	VERTICAL_WALL('│',FieldState.INUSE),
 	CORNER('+',FieldState.INUSE),
 	FOOD('*',FieldState.COLLECTABLE),
 	
