@@ -10,9 +10,9 @@ import javax.swing.Timer;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
-import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.Snake;
 import hu.ak_akademia.snake.model.SnakePiece;
+import hu.ak_akademia.snake.model.Player;
 
 public class SnakeController implements ActionListener {
 	protected Snake snake;
@@ -59,6 +59,8 @@ public class SnakeController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		int lastX = snake.getHead().getCoorX();
+		int lastY = snake.getHead().getCoorY();
 		move();
 		if(!end) {
 			screen.setText(board.toString());

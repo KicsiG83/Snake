@@ -26,9 +26,8 @@ public class ReadBoardFromFile {
 	public char[][] getBoard() {
 		String str = "";
 		try {
-			str = ReadEntireFileIntoAStringCharByChar();
+			str = ReadEntireFileIntoAStringCharByChar(stringPath);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		test = str;

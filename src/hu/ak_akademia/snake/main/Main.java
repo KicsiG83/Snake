@@ -1,6 +1,6 @@
 package hu.ak_akademia.snake.main;
 
-import hu.ak_akademia.snake.control.Controller;
+import hu.ak_akademia.snake.gameboard.MainBoard;
 
 public class Main {
 
@@ -9,11 +9,6 @@ public class Main {
 	}
 
 	private void run() {
-		Controller controller = new Controller();
-		controller.start();
-//		controller.startDemo();
-		/**
-		 * Todo
-		 */
+		new MainBoard();
 	}
 }
