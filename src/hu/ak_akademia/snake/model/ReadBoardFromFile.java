@@ -4,14 +4,14 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class ReadBoardFromFile {
-	private String test = "";
-	private String pathToFile;
+	private static String test = "";
+	private static String pathToFile;
 	
 	public ReadBoardFromFile(String pathToFile) {
-		this.pathToFile = pathToFile;
+		ReadBoardFromFile.pathToFile = pathToFile;
 	}
 
-	private String ReadEntireFileIntoAStringCharByChar() throws IOException {
+	private static String ReadEntireFileIntoAStringCharByChar(String pathToFile) throws IOException {
 
 		FileReader fileReader = new FileReader(pathToFile);
 		String fileContents = "";
@@ -23,10 +23,10 @@ public class ReadBoardFromFile {
 		return fileContents;
 	}
 
-	public char[][] getBoard() {
+	public static char[][] getBoard() {
 		String str = "";
 		try {
-			str = ReadEntireFileIntoAStringCharByChar(stringPath);
+			str = ReadEntireFileIntoAStringCharByChar(pathToFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

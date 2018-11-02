@@ -16,7 +16,7 @@ import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.ReadBoardFromFile;
 
 public class GameSelectBoard extends JFrame implements ActionListener{
-
+	
 	private static final long serialVersionUID = 1L;
 	private final JButton btBoard1 = new JButton(new ImageIcon("resources/BoardOne.png"));
 	private final JButton btBoard2 = new JButton(new ImageIcon("resources/BoardTwo.png"));
@@ -52,15 +52,19 @@ public class GameSelectBoard extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Controller controller = new Controller();
 		if(e.getSource().equals(btBoard1)) {
 			setVisible(false);
-			new Controller().start(new Board(ReadBoardFromFile.getBoard("resources/emptyBoard.txt")));
+			new ReadBoardFromFile("resources/emptyBoard.txt");
+			controller.start(new Board(ReadBoardFromFile.getBoard()));
 		}else if(e.getSource().equals(btBoard2)) {
 			setVisible(false);
-			new Controller().start(new Board(ReadBoardFromFile.getBoard("resources/testBoard.txt")));
+			new ReadBoardFromFile("resources/testBoard.txt");
+			controller.start(new Board(ReadBoardFromFile.getBoard()));
 		}else if(e.getSource().equals(btBoard3)) {
 			setVisible(false);
-			new Controller().start(new Board(ReadBoardFromFile.getBoard("resources/testBoard.txt")));
+			new ReadBoardFromFile("resources/testBoard.txt");
+			controller.start(new Board(ReadBoardFromFile.getBoard()));
 		}
 		else {
 			setVisible(false);

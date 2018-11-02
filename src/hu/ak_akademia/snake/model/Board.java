@@ -33,7 +33,6 @@ public class Board {
 				} else if (map[i][j] == '▓') {
 					fields[i][j] = (BoardItem.FIELD_WALL);
 				}
-
 			}
 		}
 	}
@@ -49,5 +48,4 @@ public class Board {
 		}
 		return result.toString();
 	}
-
 }

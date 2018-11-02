@@ -106,7 +106,6 @@ public class SnakeController implements ActionListener {
 			nextFieldCoordinates[1] = snake.getHead().getCoorY();
 			break;
 		}
-
 		return nextFieldCoordinates;
 	}
 
@@ -114,7 +113,6 @@ public class SnakeController implements ActionListener {
 		player.setPoint(player.getPoint()+1);
 		snake.eat();
 		food.placeFood();
-		
 	}
 
 	private void gameOver() {

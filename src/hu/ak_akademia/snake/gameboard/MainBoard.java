@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import hu.ak_akademia.snake.control.Controller;
+
 public class MainBoard extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -52,7 +54,8 @@ public class MainBoard extends JFrame implements ActionListener{
 			setVisible(false);
 			new GameSelectBoard();
 		}else if(e.getSource().equals(btDemo)) {
-			
+			setVisible(false);
+			new Controller().startDemo();
 		}else if(e.getSource().equals(btScores)) {
 
 		}
