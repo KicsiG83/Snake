@@ -13,9 +13,10 @@ public class Controller {
 	public void start() {
 		JFrame snakeFrame = new JFrame("A&K - Snake");
 		TextArea screen = new TextArea();
+		TextField scoring = new TextField();
 		Snake snake = new Snake(3);
 		Board field = new Board(new ReadBoardFromFile("resources\\testBoard.txt").getBoard());
-		SnakeController sc = new SnakeController(snake, field, screen);
+		SnakeController sc = new SnakeController(snake, field, screen, scoring);
 		Timer timer = new Timer(100, sc);
 		SnakeListener listener= new SnakeListener(sc);
 		snakeFrame.addKeyListener(listener);
@@ -23,6 +24,7 @@ public class Controller {
 		timer.start();
 		snakeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		screen.setFont(new Font("Monospaced", 0, 12));
+		snakeFrame.add(scoring,BorderLayout.NORTH);
 		snakeFrame.add(screen);
 		snakeFrame.setSize(1024, 768);
 		snakeFrame.setVisible(true);
@@ -33,8 +35,9 @@ public class Controller {
 		JFrame snakeFrame = new JFrame("A&K - Snake");
 		TextArea screen = new TextArea();
 		Snake snake = new Snake(3);
+		TextField scoring = new TextField();
 		Board field = new Board(new ReadBoardFromFile("resources\\demoBoard.txt").getBoard());
-		SnakeController sc = new DemoController(snake, field, screen);
+		SnakeController sc = new DemoController(snake, field, screen,scoring);
 		Timer timer = new Timer(100, sc);
 		SnakeListener listener= new SnakeListener(sc);
 		snakeFrame.addKeyListener(listener);
@@ -43,6 +46,7 @@ public class Controller {
 		snakeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		screen.setFont(new Font("Monospaced", 0, 12));
 		snakeFrame.add(screen);
+		snakeFrame.add(scoring,BorderLayout.NORTH);
 		snakeFrame.setSize(1024, 768);
 		snakeFrame.setVisible(true);
 		snakeFrame.setFocusable(true);

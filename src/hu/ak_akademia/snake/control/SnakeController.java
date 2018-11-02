@@ -1,6 +1,7 @@
 package hu.ak_akademia.snake.control;
 
 import java.awt.TextArea;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,11 +19,13 @@ public class SnakeController implements ActionListener {
 	protected Player player;
 	protected FoodFactory food;
 	TextArea screen;
+	TextField scoring;
 
-	public SnakeController(Snake snake, Board board, TextArea screen) {
+	public SnakeController(Snake snake, Board board, TextArea screen,TextField scoring) {
 		this.snake = snake;
 		this.board = board;
 		this.screen = screen;
+		this.scoring = scoring;
 		food = new FoodFactory(board);
 		player = new Player();
 		int startRow = board.getFields().length / 2;
@@ -51,6 +54,7 @@ public class SnakeController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		move();
 		screen.setText(board.toString());
+		scoring.setText(player.toString());
 	}
 
 	private void placeSnakePieceToBoard(int row, int coloum, SnakePiece piece) {

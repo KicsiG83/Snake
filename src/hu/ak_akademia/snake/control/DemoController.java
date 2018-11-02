@@ -1,6 +1,7 @@
 package hu.ak_akademia.snake.control;
 
 import java.awt.TextArea;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import hu.ak_akademia.snake.model.Snake;
 
 public class DemoController extends SnakeController implements ActionListener {
 
-	public DemoController(Snake snake, Board board, TextArea screen) {
-		super(snake,board,screen);
+	public DemoController(Snake snake, Board board, TextArea screen, TextField scoring) {
+		super(snake,board,screen,scoring);
 	}
 
 	public void setDir(Direction dir) {
@@ -29,6 +30,7 @@ public class DemoController extends SnakeController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		move();
 		screen.setText(board.toString());
+		scoring.setText(player.toString());
 	}
 
 	private void move() {
