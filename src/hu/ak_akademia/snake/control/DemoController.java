@@ -89,7 +89,9 @@ public class DemoController extends SnakeController implements ActionListener {
 	}
 
 	private void gameOver() {
-		
+		end = true;
+		timer.stop();
+		screen.setText("Game Over!");
 	}
 
 	private FieldState checkNextField() {

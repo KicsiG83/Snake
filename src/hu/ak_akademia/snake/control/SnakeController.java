@@ -5,6 +5,8 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Timer;
+
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
@@ -18,6 +20,8 @@ public class SnakeController implements ActionListener {
 	protected Direction dir = Direction.RIGHT;
 	protected Player player;
 	protected FoodFactory food;
+	protected Timer timer;
+	protected boolean end;
 	TextArea screen;
 	TextField scoring;
 
@@ -26,6 +30,7 @@ public class SnakeController implements ActionListener {
 		this.board = board;
 		this.screen = screen;
 		this.scoring = scoring;
+		timer = new Timer(100,this);
 		food = new FoodFactory(board);
 		player = new Player();
 		int startRow = board.getFields().length / 2;
@@ -45,7 +50,9 @@ public class SnakeController implements ActionListener {
 	public void setDir(Direction dir) {
 		this.dir = dir;
 	}
-
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
 	public Direction getDir() {
 		return dir;
 	}
@@ -53,8 +60,10 @@ public class SnakeController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		move();
-		screen.setText(board.toString());
-		scoring.setText(player.toString());
+		if(!end) {
+			screen.setText(board.toString());
+			scoring.setText(player.toString());
+		}
 	}
 
 	private void placeSnakePieceToBoard(int row, int coloum, SnakePiece piece) {
@@ -107,6 +116,9 @@ public class SnakeController implements ActionListener {
 	}
 
 	private void gameOver() {
+		end = true;
+		timer.stop();
+		screen.setText("Game Over!");
 	}
 
 	private FieldState checkNextField() {

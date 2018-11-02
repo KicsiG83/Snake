@@ -17,11 +17,10 @@ public class Controller {
 		Snake snake = new Snake(3);
 		Board field = new Board(new ReadBoardFromFile("resources\\testBoard.txt").getBoard());
 		SnakeController sc = new SnakeController(snake, field, screen, scoring);
-		Timer timer = new Timer(100, sc);
 		SnakeListener listener= new SnakeListener(sc);
 		snakeFrame.addKeyListener(listener);
 		
-		timer.start();
+		sc.timer.start();
 		snakeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		screen.setFont(new Font("Monospaced", 0, 12));
 		snakeFrame.add(scoring,BorderLayout.NORTH);
@@ -38,11 +37,10 @@ public class Controller {
 		TextField scoring = new TextField();
 		Board field = new Board(new ReadBoardFromFile("resources\\demoBoard.txt").getBoard());
 		SnakeController sc = new DemoController(snake, field, screen,scoring);
-		Timer timer = new Timer(100, sc);
 		SnakeListener listener= new SnakeListener(sc);
 		snakeFrame.addKeyListener(listener);
 		
-		timer.start();
+		sc.timer.start();
 		snakeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		screen.setFont(new Font("Monospaced", 0, 12));
 		snakeFrame.add(screen);
@@ -50,6 +48,8 @@ public class Controller {
 		snakeFrame.setSize(1024, 768);
 		snakeFrame.setVisible(true);
 		snakeFrame.setFocusable(true);
+		
+		
 	}
 	
 }
