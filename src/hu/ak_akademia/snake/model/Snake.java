@@ -37,5 +37,4 @@ public class Snake {
 		}
 		return lastPiece;
 	}
-
 }

@@ -56,15 +56,15 @@ public class GameSelectBoard extends JFrame implements ActionListener{
 		if(e.getSource().equals(btBoard1)) {
 			setVisible(false);
 			new ReadBoardFromFile("resources/emptyBoard.txt");
-			controller.start(new Board(ReadBoardFromFile.getBoard()));
+			controller.start(new Board(ReadBoardFromFile.getBoard()), 1);
 		}else if(e.getSource().equals(btBoard2)) {
 			setVisible(false);
 			new ReadBoardFromFile("resources/testBoard.txt");
-			controller.start(new Board(ReadBoardFromFile.getBoard()));
+			controller.start(new Board(ReadBoardFromFile.getBoard()), 1);
 		}else if(e.getSource().equals(btBoard3)) {
 			setVisible(false);
 			new ReadBoardFromFile("resources/testBoard.txt");
-			controller.start(new Board(ReadBoardFromFile.getBoard()));
+			controller.start(new Board(ReadBoardFromFile.getBoard()), 1);
 		}
 		else {
 			setVisible(false);

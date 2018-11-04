@@ -5,16 +5,20 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import hu.ak_akademia.snake.gameboard.GameOver;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
+import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.Snake;
 import hu.ak_akademia.snake.model.SnakePiece;
-import hu.ak_akademia.snake.model.Player;
 
-public class SnakeController implements ActionListener {
+public class SnakeController extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
 	protected Snake snake;
 	protected Board board;
 	protected Direction dir = Direction.RIGHT;
@@ -25,17 +29,17 @@ public class SnakeController implements ActionListener {
 	TextArea screen;
 	TextField scoring;
 
-	public SnakeController(Snake snake, Board board, TextArea screen,TextField scoring) {
+	public SnakeController(Snake snake, Board board, TextArea screen, TextField scoring) {
 		this.snake = snake;
 		this.board = board;
 		this.screen = screen;
 		this.scoring = scoring;
-		timer = new Timer(100,this);
+		timer = new Timer(100, this);
 		food = new FoodFactory(board);
 		player = new Player();
 		int startRow = board.getFields().length / 2;
 		int startColoum = snake.getLength() + 2;
-	
+
 		SnakePiece lastPiece = snake.getHead();
 		while (lastPiece.getPointer() != null) {
 			lastPiece.setCoorX(startRow);
@@ -50,21 +54,22 @@ public class SnakeController implements ActionListener {
 	public void setDir(Direction dir) {
 		this.dir = dir;
 	}
+
 	public void setTimer(Timer timer) {
 		this.timer = timer;
 	}
+
 	public Direction getDir() {
 		return dir;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		int lastX = snake.getHead().getCoorX();
-		int lastY = snake.getHead().getCoorY();
 		move();
-		if(!end) {
+		if (!end) {
 			screen.setText(board.toString());
 			scoring.setText(player.toString());
+			setVisible(false);
 		}
 	}
 
@@ -78,7 +83,7 @@ public class SnakeController implements ActionListener {
 		case COLLECTABLE:
 			feed();
 		case FREE:
-			new SnakeMover(snake,board).autoMove(nextFieldCoors);
+			new SnakeMover(snake, board).autoMove(nextFieldCoors);
 			break;
 		case INUSE:
 			gameOver();
@@ -110,7 +115,7 @@ public class SnakeController implements ActionListener {
 	}
 
 	private void feed() {
-		player.setPoint(player.getPoint()+1);
+		player.setPoint(player.getPoint() + 1);
 		snake.eat();
 		food.placeFood();
 	}
@@ -118,7 +123,7 @@ public class SnakeController implements ActionListener {
 	private void gameOver() {
 		end = true;
 		timer.stop();
-		screen.setText("Game Over!");
+		new GameOver();
 	}
 
 	private FieldState checkNextField() {

@@ -3,7 +3,7 @@ package hu.ak_akademia.snake.model;
 public enum BoardItem {
 	NO_ITEM(' ',FieldState.FREE),
 	SNAKE_HEAD('O', FieldState.INUSE),
-	SNAKE_BODY('%', FieldState.INUSE),
+	SNAKE_BODY('o', FieldState.INUSE),
 	HORIZONTAL_WALL('─',FieldState.INUSE),
 	VERTICAL_WALL('│',FieldState.INUSE),
 	CORNER('+',FieldState.INUSE),
