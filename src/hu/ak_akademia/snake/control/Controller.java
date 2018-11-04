@@ -1,6 +1,7 @@
 package hu.ak_akademia.snake.control;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.TextArea;
 import java.awt.TextField;
@@ -27,6 +28,7 @@ public class Controller extends JFrame{
 		snakeFrame.setSize(1024, 768);
 		TextArea screen = new TextArea();
 		TextField scoring = new TextField();
+		screen.setBackground(new Color(141, 181, 5));
 		Snake snake = new Snake(3);
 		snakeFrame.setLocationRelativeTo(null);
 		SnakeController sc = new SnakeController(snake, field, screen, scoring);
