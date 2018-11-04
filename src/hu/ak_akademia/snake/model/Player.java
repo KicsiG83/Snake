@@ -2,18 +2,19 @@ package hu.ak_akademia.snake.model;
 
 public class Player {
 
-	private String time = "00:00";
+	private long time;
 	private int point;
+	private long startTime = System.currentTimeMillis();
 
 	public Player() {
 		super();
 	}
 
-	public String getTime() {
+	public long getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(long time) {
 		this.time = time;
 	}
 
@@ -27,6 +28,6 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Time: " + time + "s  Points: " + point;
+		return "Time: " + (System.currentTimeMillis() - startTime) / 1000 + "s  Points: " + point;
 	}
 }
