@@ -1,11 +1,11 @@
 package hu.ak_akademia.snake.control;
 
-import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.Timer;
 
 import hu.ak_akademia.snake.gameboard.GameOver;
@@ -16,7 +16,7 @@ import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.Snake;
 import hu.ak_akademia.snake.model.SnakePiece;
 
-public class SnakeController extends JFrame implements ActionListener {
+public class SnakeController extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	protected Snake snake;
@@ -26,10 +26,10 @@ public class SnakeController extends JFrame implements ActionListener {
 	protected FoodFactory food;
 	protected Timer timer;
 	protected boolean end;
-	TextArea screen;
+	JTextPane screen;
 	TextField scoring;
 
-	public SnakeController(Snake snake, Board board, TextArea screen, TextField scoring) {
+	public SnakeController(Snake snake, Board board, JTextPane screen, TextField scoring) {
 		this.snake = snake;
 		this.board = board;
 		this.screen = screen;
@@ -39,7 +39,6 @@ public class SnakeController extends JFrame implements ActionListener {
 		player = new Player();
 		int startRow = board.getFields().length / 2;
 		int startColoum = snake.getLength() + 2;
-
 		SnakePiece lastPiece = snake.getHead();
 		while (lastPiece.getPointer() != null) {
 			lastPiece.setCoorX(startRow);
@@ -69,7 +68,6 @@ public class SnakeController extends JFrame implements ActionListener {
 		if (!end) {
 			screen.setText(board.toString());
 			scoring.setText(player.toString());
-			setVisible(false);
 		}
 	}
 
@@ -123,6 +121,8 @@ public class SnakeController extends JFrame implements ActionListener {
 	private void gameOver() {
 		end = true;
 		timer.stop();
+		screen.setText("Game Over");
+		setVisible(false);
 		new GameOver();
 	}
 

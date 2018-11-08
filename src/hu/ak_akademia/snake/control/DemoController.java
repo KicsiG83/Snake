@@ -1,11 +1,12 @@
 package hu.ak_akademia.snake.control;
 
-import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JTextPane;
 
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
@@ -15,14 +16,16 @@ import hu.ak_akademia.snake.model.Snake;
 public class DemoController extends SnakeController implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	public DemoController(Snake snake, Board board, TextArea screen, TextField scoring) {
+	public DemoController(Snake snake, Board board, JTextPane screen, TextField scoring) {
 		super(snake, board, screen, scoring);
 	}
 
+	@Override
 	public void setDir(Direction dir) {
 		this.dir = dir;
 	}
 
+	@Override
 	public Direction getDir() {
 		return dir;
 	}
