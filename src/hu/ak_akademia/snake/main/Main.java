@@ -9,6 +9,6 @@ public class Main {
 	}
 
 	private void run() {
-		new MainBoard();
+		 new MainBoard();
 	}
 }

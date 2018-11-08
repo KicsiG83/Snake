@@ -6,7 +6,7 @@ import java.io.IOException;
 public class ReadBoardFromFile {
 	private static String test = "";
 	private static String pathToFile;
-	
+
 	public ReadBoardFromFile(String pathToFile) {
 		ReadBoardFromFile.pathToFile = pathToFile;
 	}
