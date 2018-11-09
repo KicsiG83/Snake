@@ -14,11 +14,13 @@ import javax.swing.JPanel;
 
 import hu.ak_akademia.snake.control.Controller;
 import hu.ak_akademia.snake.model.Board;
+import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.ReadBoardFromFile;
 
 public class MainBoard extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private Player player = new Player();
 	private final JButton btGame = new JButton(new ImageIcon("resources/pictures/buttons/game.png"));
 	private final JButton btDemo = new JButton(new ImageIcon("resources/pictures/buttons/demo.png"));
 	private final JButton btScores = new JButton(new ImageIcon("resources/pictures/buttons/scores.png"));
@@ -57,6 +59,8 @@ public class MainBoard extends JFrame implements ActionListener {
 	}
 
 	private JPanel createGameSelectPanel() {
+		player = new Player();
+		setBackground(Color.decode("#8cb404"));
 		gameSelectMainPanel.setBackground(Color.decode("#8cb404"));
 		btBoard1.addActionListener(this);
 		btBoard1.setBackground(Color.decode("#8cb404"));
@@ -136,24 +140,34 @@ public class MainBoard extends JFrame implements ActionListener {
 		} else if (e.getSource().equals(btReturn)) {
 			jPanelController(gameSelectMainPanel, createMainPanel());
 		} else if (e.getSource().equals(btBoard1)) {
+			player.setSelectedBoard(1);
 			callController("resources/boards/emptyBoard.txt", 1);
 		} else if (e.getSource().equals(btBoard2)) {
+			player.setSelectedBoard(2);
 			callController("resources/boards/testBoard.txt", 1);
 		} else if (e.getSource().equals(btBoard3)) {
+			player.setSelectedBoard(3);
 			callController("resources/boards/testBoard.txt", 1);
 		} else if (e.getSource().equals(btBoard4)) {
+			player.setSelectedBoard(4);
 			callController("resources/boards/emptyBoard.txt", 1);
 		} else if (e.getSource().equals(btBoard5)) {
+			player.setSelectedBoard(5);
 			callController("resources/boards/emptyBoard.txt", 1);
 		} else if (e.getSource().equals(btBoard6)) {
+			player.setSelectedBoard(6);
 			callController("resources/boards/emptyBoard.txt", 1);
 		} else if (e.getSource().equals(btBoard7)) {
+			player.setSelectedBoard(7);
 			callController("resources/boards/testBoard.txt", 1);
 		} else if (e.getSource().equals(btBoard8)) {
+			player.setSelectedBoard(8);
 			callController("resources/boards/testBoard.txt", 1);
 		} else if (e.getSource().equals(btBoard9)) {
+			player.setSelectedBoard(9);
 			callController("resources/boards/emptyBoard.txt", 1);
 		} else if (e.getSource().equals(btBoard10)) {
+			player.setSelectedBoard(10);
 			callController("resources/boards/emptyBoard.txt", 1);
 		} else {
 			setVisible(false);
@@ -170,7 +184,7 @@ public class MainBoard extends JFrame implements ActionListener {
 
 	private void callController(String filePath, int index) {
 		setVisible(false);
-		Controller controller = new Controller();
+		Controller controller = new Controller(player);
 		new ReadBoardFromFile(filePath);
 		controller.start(new Board(ReadBoardFromFile.getBoard()), index);
 	}

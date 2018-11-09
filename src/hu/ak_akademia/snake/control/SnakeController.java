@@ -34,14 +34,14 @@ public class SnakeController extends JPanel implements ActionListener {
 	JTextPane screen;
 	TextField scoring;
 
-	public SnakeController(Snake snakeParam, Board boardParam, JTextPane screenParam, TextField scoringParam) {
+	public SnakeController(Snake snakeParam, Board boardParam, JTextPane screenParam, TextField scoringParam, Player player) {
 		snake = snakeParam;
 		board = boardParam;
 		screen = screenParam;
 		scoring = scoringParam;
 		timer = new Timer(100, this);
 		food = new FoodFactory(boardParam);
-		player = new Player();
+		this.player = player;
 		screen.setLayout(new BorderLayout());
         screen.setBorder(new EmptyBorder(10, 10, 10, 10));
 		screen.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -131,8 +131,8 @@ public class SnakeController extends JPanel implements ActionListener {
 	private void gameOver() {
 		end = true;
 		timer.stop();
-		screen.setText("Game Over");
-		screen.add(new GameOver());
+		screen.setText(""); // MAGIC
+		screen.add(new GameOver(player));
 		setVisible(true);
 	}
 

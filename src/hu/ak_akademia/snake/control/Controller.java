@@ -14,6 +14,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import hu.ak_akademia.snake.model.Board;
+import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.Snake;
 import hu.ak_akademia.snake.view.SnakeListener;
 
@@ -21,7 +22,12 @@ public class Controller extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private final ImageIcon icon = new ImageIcon("resources/snake-icon.png");
+	Player player = new Player();
 
+	public Controller(Player player) {
+		this.player = player;
+	}
+	
 	public void start(Board field, int index) {
 		JFrame snakeFrame = new JFrame("A&K - Snake");
 		snakeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -39,9 +45,9 @@ public class Controller extends JPanel {
 		snakeFrame.setLocationRelativeTo(null);
 		SnakeController sc;
 		if (index == 0) {
-			sc = new DemoController(snake, field, screen, scoring);
+			sc = new DemoController(snake, field, screen, scoring, player);
 		} else {
-			sc = new SnakeController(snake, field, screen, scoring);
+			sc = new SnakeController(snake, field, screen, scoring, player);
 		}
 		SnakeListener listener = new SnakeListener(sc);
 		snakeFrame.addKeyListener(listener);

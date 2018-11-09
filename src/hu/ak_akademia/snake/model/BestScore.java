@@ -10,9 +10,9 @@ import hu.ak_akademia.snake.control.JDBC;
 
 public class BestScore {
 
-	int bestScore = -1;
-	String bestTime;
-	String bestName;
+	private int bestScore = -1;
+	private String bestTime;
+	private String bestName;
 
 	public BestScore(int mapNumber) {
 		try {

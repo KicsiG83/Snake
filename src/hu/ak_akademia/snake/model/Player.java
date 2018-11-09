@@ -5,9 +5,14 @@ public class Player {
 	private long time;
 	private int point;
 	private long startTime = System.currentTimeMillis();
+	private int selectedBoard = 0;
 
-	public Player() {
-		super();
+	public int getSelectedBoard() {
+		return selectedBoard;
+	}
+
+	public void setSelectedBoard(int selectedBoard) {
+		this.selectedBoard = selectedBoard;
 	}
 
 	public long getTime() {

@@ -11,13 +11,14 @@ import javax.swing.JTextPane;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
+import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.Snake;
 
 public class DemoController extends SnakeController implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	public DemoController(Snake snake, Board board, JTextPane screen, TextField scoring) {
-		super(snake, board, screen, scoring);
+	public DemoController(Snake snake, Board board, JTextPane screen, TextField scoring, Player player) {
+		super(snake, board, screen, scoring, player);
 	}
 
 	@Override
