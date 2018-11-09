@@ -1,12 +1,16 @@
 package hu.ak_akademia.snake.control;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 
 import hu.ak_akademia.snake.gameboard.GameOver;
 import hu.ak_akademia.snake.model.Board;
@@ -26,20 +30,26 @@ public class SnakeController extends JPanel implements ActionListener {
 	protected FoodFactory food;
 	protected Timer timer;
 	protected boolean end;
+	private JPanel pn = new JPanel();
 	JTextPane screen;
 	TextField scoring;
 
-	public SnakeController(Snake snake, Board board, JTextPane screen, TextField scoring) {
-		this.snake = snake;
-		this.board = board;
-		this.screen = screen;
-		this.scoring = scoring;
+	public SnakeController(Snake snakeParam, Board boardParam, JTextPane screenParam, TextField scoringParam) {
+		snake = snakeParam;
+		board = boardParam;
+		screen = screenParam;
+		scoring = scoringParam;
 		timer = new Timer(100, this);
-		food = new FoodFactory(board);
+		food = new FoodFactory(boardParam);
 		player = new Player();
-		int startRow = board.getFields().length / 2;
+		screen.setLayout(new BorderLayout());
+        screen.setBorder(new EmptyBorder(10, 10, 10, 10));
+		screen.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		int startRow = boardParam.getFields().length / 2;
 		int startColoum = snake.getLength() + 2;
 		SnakePiece lastPiece = snake.getHead();
+		pn.add(screenParam);
+		add(pn);
 		while (lastPiece.getPointer() != null) {
 			lastPiece.setCoorX(startRow);
 			lastPiece.setCoorY(startColoum);
@@ -122,8 +132,8 @@ public class SnakeController extends JPanel implements ActionListener {
 		end = true;
 		timer.stop();
 		screen.setText("Game Over");
-		setVisible(false);
-		new GameOver();
+		screen.add(new GameOver());
+		setVisible(true);
 	}
 
 	private FieldState checkNextField() {

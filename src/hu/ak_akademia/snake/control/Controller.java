@@ -7,6 +7,7 @@ import java.awt.TextField;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.WindowConstants;
 import javax.swing.text.SimpleAttributeSet;
@@ -16,17 +17,18 @@ import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Snake;
 import hu.ak_akademia.snake.view.SnakeListener;
 
-public class Controller extends JFrame {
+public class Controller extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private final ImageIcon icon = new ImageIcon("resources/snake-icon.png");
 
 	public void start(Board field, int index) {
 		JFrame snakeFrame = new JFrame("A&K - Snake");
+		snakeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		snakeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		snakeFrame.setIconImage(icon.getImage());
 		snakeFrame.setResizable(false);
-		snakeFrame.setSize(1024, 768);
+		snakeFrame.setSize(1920, 1080);
 		JTextPane screen = new JTextPane();
 		TextField scoring = new TextField();
 		screen.setBackground(new Color(141, 181, 5));

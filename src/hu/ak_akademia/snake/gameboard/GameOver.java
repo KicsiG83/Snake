@@ -10,35 +10,31 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class GameOver extends JFrame implements ActionListener {
+public class GameOver extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField playerNameTF = new JTextField("", 20);
 	private JLabel gameOverMessage = new JLabel();
-	private JButton btOk = new JButton(new ImageIcon("resources/pictures/ok.png"));
-	private JButton btExit = new JButton(new ImageIcon("resources/pictures/exit.png"));
-	private JButton btReturn = new JButton(new ImageIcon("resources/pictures/return.png"));
-	private JLabel lbGetName = new JLabel("Jétékos neve");
+	private JButton btOk = new JButton(new ImageIcon("resources/pictures/buttons/ok.png"));
+	private JButton btExit = new JButton(new ImageIcon("resources/pictures/buttons/exit.png"));
+	private JButton btReturn = new JButton(new ImageIcon("resources/pictures/buttons/return.png"));
+	private JLabel lbGetName = new JLabel("Játékos neve");
 	private JLabel lbScore = new JLabel("Elért pontszám: " + 30);
 
 	public GameOver() {
+		btOk.addActionListener(this);
 		btOk.setBackground(Color.decode("#8cb404"));
+		btReturn.addActionListener(this);
 		btReturn.setBackground(Color.decode("#8cb404"));
+		btExit.addActionListener(this);
 		btExit.setBackground(Color.decode("#8cb404"));
-		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("SNAKE");
-		setSize(1920, 1080);
-		setResizable(false);
-		setIconImage(new ImageIcon("resources/pictures/snake-icon.png").getImage());
-		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());
+
 		
 		/**
 		 * TODO
@@ -53,34 +49,22 @@ public class GameOver extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource().equals(btOk)) {
-			setVisible(false);
-		}else if(e.getSource().equals(btReturn)) {
-			setVisible(false);
-			new MainBoard();
-		}else {
-			setVisible(false);
-			dispose();
-		}
-	}
-	
+
 	private JPanel createDataPanel() {
 		JPanel dataPn = new JPanel();
 		dataPn.setLayout(new FlowLayout());
 		dataPn.add(lbScore);
 		return dataPn;
 	}
-	
+
 	private JPanel createGameOverPanel(JPanel getInput) {
 		JPanel gameOverPn = new JPanel();
 		gameOverPn.setBackground(Color.decode("#8cb404"));
-		gameOverPn.add(new JLabel(new ImageIcon("resources/pictures/gameOver.png")), BorderLayout.NORTH);
+		gameOverPn.add(new JLabel(new ImageIcon("resources/pictures/background/gameOver.png")), BorderLayout.NORTH);
 		gameOverPn.add(getInput, BorderLayout.CENTER);
 		return gameOverPn;
 	}
-	
+
 	private JPanel createGetInputPanel() {
 		JPanel getInput = new JPanel();
 		lbGetName.setFont(new Font("Ariel", 0, 30));
@@ -92,5 +76,17 @@ public class GameOver extends JFrame implements ActionListener {
 		getInput.add(btReturn);
 		getInput.add(btExit);
 		return getInput;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(btOk)) {
+			setVisible(false);
+		} else if (e.getSource().equals(btReturn)) {
+			this.setVisible(false);
+			new MainBoard();
+		} else {
+			setVisible(false);
+			System.exit(0);
+		}
 	}
 }

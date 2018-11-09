@@ -24,11 +24,11 @@ public class BestScore {
 				bestTime = rs.getString("BESTTIME");
 				bestName = rs.getString("BESTNAME");
 			} else {
-				System.out.println("Nincs mÈg t·rolt rekord ehhez a p·ly·hoz!");
+				System.out.println("Nincs m√©g t√°rolt rekord ehhez a p√°ly√°hoz!");
 			}
 			connect.close();
 		} catch (Exception e) {
-			System.out.println("Elhal·s van a BestScore beolvas·sn·l.");
+			System.out.println("Elhal√°s van a BestScore beolvas√°sn√°l.");
 			System.out.println(e);
 		}
 	}
@@ -57,8 +57,8 @@ public class BestScore {
 				statement.executeUpdate();
 				connect.close();
 			} catch (SQLException e) {
-				//e.printStackTrace();
-				System.out.println("Nem siker¸lt az ˙j rekord besz˙r·sa!");
+				System.out.println("Nem siker√ºlt az √∫j rekord besz√∫r√°sa!");
+				e.printStackTrace();
 			}
 		} else {
 			try {
@@ -71,8 +71,8 @@ public class BestScore {
 				statement.executeUpdate();
 				connect.close();
 			} catch (SQLException e) {
-				//e.printStackTrace();
-				System.out.println("Nem siker¸lt a rekord mÛdosÌt·sa!");
+				System.out.println("Nem siker√ºlt a rekord m√≥dos√≠t√°sa!");
+				e.printStackTrace();
 			}
 		}
 		this.bestScore = bestScore;
