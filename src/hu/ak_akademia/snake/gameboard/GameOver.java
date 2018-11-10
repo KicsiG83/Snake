@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 
 import hu.ak_akademia.snake.model.BestScore;
 import hu.ak_akademia.snake.model.Player;
+import hu.ak_akademia.snake.model.Score;
 
 public class GameOver extends JPanel implements ActionListener {
 
@@ -59,12 +60,21 @@ public class GameOver extends JPanel implements ActionListener {
 	}
 
 	private void checkNewHighscore(Player player) {
-		int highScore = new BestScore(player.getSelectedBoard()).getBestScore();
+		Score playerScore = new Score(player.getPoint(),player.getTime());
+		Score highScore = new BestScore(player.getSelectedBoard());
+		switch(highScore.compareTo(playerScore)) {
+		case 1:
+		case 0:
+			break;
+		case -1:
+			newHighScore = true;
+		}
+/*		int highScore = new BestScore(player.getSelectedBoard()).getBestScore();
 		int playerScore = player.getPoint();
 		if (highScore < playerScore) {
 			newHighScore = true;
 		}
-	}
+*/	}
 	
 	private JPanel createGameOverPanel(JPanel getInput) {
 		JPanel gameOverPn = new JPanel();

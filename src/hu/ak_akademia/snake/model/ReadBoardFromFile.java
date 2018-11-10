@@ -31,7 +31,7 @@ public class ReadBoardFromFile {
 			e.printStackTrace();
 		}
 		test = str;
-		String[] splitedtest = test.split("\r\n");
+		String[] splitedtest = test.split("\n");
 		int n = splitedtest.length;
 		int m = splitedtest[0].length();
 		char[][] result = new char[n][m];

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import hu.ak_akademia.snake.control.JDBC;
 
-public class BestScore {
+public class BestScore extends Score {
 
 	private int bestScore = -1;
 	private String bestTime;
@@ -23,6 +23,8 @@ public class BestScore {
 				bestScore = rs.getInt("BESTSCORE");
 				bestTime = rs.getString("BESTTIME");
 				bestName = rs.getString("BESTNAME");
+				super.point = bestScore;
+				super.time = convertTime(bestTime);
 			} else {
 				System.out.println("Nincs még tárolt rekord ehhez a pályához!");
 			}
@@ -78,5 +80,15 @@ public class BestScore {
 		this.bestScore = bestScore;
 		this.bestTime = bestTime;
 		this.bestName = bestName;
+	}
+
+	private long convertTime(String bestTime) {
+		String[] splittedTime = bestTime.split(":");
+		int n=splittedTime.length;
+		Long time = 0L;
+		for(int i = n - 1; i >= 0; i--) {
+			time = time + (long) Math.pow(Integer.parseInt(splittedTime[i]),n-i);
+		}
+		return time;
 	}
 }
