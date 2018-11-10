@@ -9,8 +9,11 @@ public class JDBC {
 	private Connection connection;
 
 	public Connection buildConnection() {
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String user = "SNAKE";
+		String password = "snakePass";
 		try {
-			connection = DriverManager.getConnection("jdbc:oracle:thin:admin/admin@localhost:1521:xe");
+			connection = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
 			System.err.println("A játék nem tudott csatlakozni az adatbázishoz!");
 			System.out.println(e.toString());

@@ -17,7 +17,7 @@ public class BestScore {
 	public BestScore(int mapNumber) {
 		try {
 			Connection connect = new JDBC().buildConnection();
-			PreparedStatement statement = connect.prepareStatement("SELECT * FROM SNEAK_HIGHSCORES WHERE MAP_NO = " + mapNumber);
+			PreparedStatement statement = connect.prepareStatement("SELECT * FROM SNAKE_HIGHSCORES WHERE MAP_NO = " + mapNumber);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
 				bestScore = rs.getInt("BESTSCORE");

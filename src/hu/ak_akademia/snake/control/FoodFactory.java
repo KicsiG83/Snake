@@ -30,9 +30,9 @@ public class FoodFactory {
 	private List<Integer[]> getListOfFreeFields() {
 		List<Integer[]> result = new ArrayList<>();
 		int row = board.getFields().length;
-		int coloum = board.getFields()[0].length;
+		int column = board.getFields()[0].length;
 		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < coloum; j++) {
+			for (int j = 0; j < column; j++) {
 				if(board.getFields()[i][j].getState().equals(FieldState.FREE)) {
 					Integer[] addMe = {i,j};
 					result.add(addMe);
@@ -45,7 +45,4 @@ public class FoodFactory {
 	public int[] getCoorsOfLastFood() {
 		return coorsOfLastFood;
 	}
-	
-	
-	
 }
