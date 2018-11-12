@@ -15,7 +15,7 @@ import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
 import hu.ak_akademia.snake.gameboard.Buttons;
-import hu.ak_akademia.snake.gameboard.GameOver;
+import hu.ak_akademia.snake.gameboard.GameOverPanel;
 import hu.ak_akademia.snake.gameboard.MainBoard;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
@@ -153,7 +153,7 @@ public class SnakeController extends JPanel implements ActionListener {
 		end = true;
 		timer.stop();
 		screen.setText(""); // MAGIC
-		screen.add(new GameOver(player));
+		screen.add(new GameOverPanel(player));
 		setVisible(true);
 	}
 

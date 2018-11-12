@@ -34,24 +34,42 @@ public class MainBoard extends JFrame implements ActionListener {
 	private JButton btBoard9 = new JButton();
 	private JButton btBoard10 = new JButton();
 	private JButton btReturn = new JButton();
+	private JButton btScoreReturn = new JButton();
+	private JButton btGameOverReturn = new JButton();
+	private JButton btGameOverExit = new JButton();
+	private JButton btGameOverOk = new JButton();
 	private JPanel mainPanel = new JPanel();
+	private JPanel scorePanel = new JPanel();
 	private JPanel gameSelectMainPanel = new JPanel();
+	private JPanel boardPanel = new JPanel();
+	private JPanel gameOverPanel = new JPanel();
 
 	public MainBoard() {
 		player = new Player();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("A&K Snake");
 		setSize(1920, 1080);
-		this.setBackground(Color.decode("#8cb404"));
+		setBackground(Color.decode("#8cb404"));
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setResizable(false);
 		setIconImage(new ImageIcon("resources/pictures/background/snake-icon.png").getImage());
 		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());
-		mainPanel = new MainPanel().createPanel();
-		setMainButtons();
+		setJpanels();
+		// mainPanel = new MainPanel().createPanel();
+		// setMainButtons();
 		add(mainPanel, BorderLayout.CENTER);
 		setVisible(true);
+	}
+
+	private void setJpanels() {
+		mainPanel = new MainPanel().createPanel();
+		setMainButtons();
+		gameSelectMainPanel = new GameSelectPanel().createPanel();
+		setGameSelectButtons();
+		scorePanel = new ScoresPanel().createPanel();
+		setScoreButton();
+
 	}
 
 	private void setMainButtons() {
@@ -65,11 +83,17 @@ public class MainBoard extends JFrame implements ActionListener {
 		btExit = (JButton) temp.getComponent(3);
 		btExit.addActionListener(this);
 	}
-	
+
+	private void setScoreButton() {
+		JPanel buttonPanel = (JPanel) scorePanel.getComponent(1);
+		btScoreReturn = (JButton) buttonPanel.getComponent(1);
+		btScoreReturn.addActionListener(this);
+	}
+
 	private void setGameSelectButtons() {
 		JPanel buttonPanel = (JPanel) gameSelectMainPanel.getComponent(1);
-		JPanel firstPanel = (JPanel) buttonPanel .getComponent(0);
-		JPanel secondPanel = (JPanel) buttonPanel .getComponent(1);
+		JPanel firstPanel = (JPanel) buttonPanel.getComponent(0);
+		JPanel secondPanel = (JPanel) buttonPanel.getComponent(1);
 		btBoard1 = (JButton) firstPanel.getComponent(0);
 		btBoard1.addActionListener(this);
 		btBoard2 = (JButton) firstPanel.getComponent(1);
@@ -93,49 +117,66 @@ public class MainBoard extends JFrame implements ActionListener {
 		btReturn = (JButton) secondPanel.getComponent(0);
 		btReturn.addActionListener(this);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btGame)) {
-			gameSelectMainPanel = new GameSelectPanel().createPanel();
-			setGameSelectButtons();
 			jPanelController(mainPanel, gameSelectMainPanel);
 		} else if (e.getSource().equals(btDemo)) {
-			callController("resources/boards/demoBoard.txt", 0);
+			jPanelController(mainPanel, callController("resources/boards/demoBoard.txt", 0));
 		} else if (e.getSource().equals(btScores)) {
-			
+			jPanelController(mainPanel, scorePanel);
 		} else if (e.getSource().equals(btReturn)) {
-			jPanelController(gameSelectMainPanel, new MainPanel().createPanel());
-		} else if (e.getSource().equals(btBoard1)) {
+			jPanelController(gameSelectMainPanel, mainPanel);
+			setMainButtons();
+		}
+
+		else if (e.getSource().equals(btScoreReturn)) {
+			jPanelController(scorePanel, mainPanel);
+			setMainButtons();
+		} else if (e.getSource().equals(btGameOverReturn)) {
+			jPanelController(gameOverPanel, mainPanel);
+			setMainButtons();
+		}else if (e.getSource().equals(btBoard1)) {
 			player.setSelectedBoard(1);
-			callController("resources/boards/emptyBoard.txt", 1);
+			boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+			jPanelController(gameSelectMainPanel, boardPanel);
 		} else if (e.getSource().equals(btBoard2)) {
 			player.setSelectedBoard(2);
-			callController("resources/boards/testBoard.txt", 1);
+			boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+			jPanelController(gameSelectMainPanel, boardPanel);
 		} else if (e.getSource().equals(btBoard3)) {
 			player.setSelectedBoard(3);
-			callController("resources/boards/testBoard.txt", 1);
+			boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+			jPanelController(gameSelectMainPanel, boardPanel);
 		} else if (e.getSource().equals(btBoard4)) {
 			player.setSelectedBoard(4);
-			callController("resources/boards/emptyBoard.txt", 1);
+			boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+			jPanelController(gameSelectMainPanel, boardPanel);
 		} else if (e.getSource().equals(btBoard5)) {
 			player.setSelectedBoard(5);
-			callController("resources/boards/emptyBoard.txt", 1);
+			boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+			jPanelController(gameSelectMainPanel, boardPanel);
 		} else if (e.getSource().equals(btBoard6)) {
 			player.setSelectedBoard(6);
-			callController("resources/boards/emptyBoard.txt", 1);
+			boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+			jPanelController(gameSelectMainPanel, boardPanel);
 		} else if (e.getSource().equals(btBoard7)) {
 			player.setSelectedBoard(7);
-			callController("resources/boards/testBoard.txt", 1);
+			boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+			jPanelController(gameSelectMainPanel, boardPanel);
 		} else if (e.getSource().equals(btBoard8)) {
 			player.setSelectedBoard(8);
-			callController("resources/boards/testBoard.txt", 1);
+			boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+			jPanelController(gameSelectMainPanel, boardPanel);
 		} else if (e.getSource().equals(btBoard9)) {
 			player.setSelectedBoard(9);
-			callController("resources/boards/emptyBoard.txt", 1);
+			boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+			jPanelController(gameSelectMainPanel, boardPanel);
 		} else if (e.getSource().equals(btBoard10)) {
 			player.setSelectedBoard(10);
-			callController("resources/boards/emptyBoard.txt", 1);
+			boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+			jPanelController(gameSelectMainPanel, boardPanel);
 		} else {
 			setVisible(false);
 			dispose();
@@ -149,14 +190,14 @@ public class MainBoard extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 
-	private void callController(String filePath, int index) {
+	private JPanel callController(String filePath, int index) {
 		setVisible(false);
 		Controller controller = new Controller(player);
 		new ReadBoardFromFile(filePath);
-		controller.start(new Board(ReadBoardFromFile.getBoard()), index);
+		return controller.start(new Board(ReadBoardFromFile.getBoard()), index);
 	}
-	
-	public void disposeFrame(){
+
+	public void disposeFrame() {
 		setVisible(false);
 		dispose();
 	}

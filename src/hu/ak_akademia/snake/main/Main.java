@@ -7,8 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import hu.ak_akademia.snake.gameboard.MainBoard;
-import hu.ak_akademia.snake.gameboard.Scores;
+import hu.ak_akademia.snake.gameboard.GameOverPanel;
+import hu.ak_akademia.snake.model.Player;
 
 public class Main extends JFrame{
 
@@ -32,7 +32,9 @@ public class Main extends JFrame{
 		setLayout(new BorderLayout());
 		JPanel pn = new JPanel();
 		pn.setBackground(Color.decode("#8cb404"));
-		pn = new Scores().createPanel();
+		Player player = new Player();
+		pn = new GameOverPanel(player).createPanel();
+//		pn = new ScoresPanel().createPanel();
 		add(pn);
 		setVisible(true);
 	}

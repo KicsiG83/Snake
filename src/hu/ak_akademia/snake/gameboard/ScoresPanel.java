@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,6 +23,7 @@ public class ScoresPanel extends JPanel implements JPanelController {
 	private final JLabel player = new JLabel(new ImageIcon("resources/pictures/background/player.png"));
 	private final JLabel score = new JLabel(new ImageIcon("resources/pictures/background/scores.png"));
 	private final JLabel timer = new JLabel(new ImageIcon("resources/pictures/background/timer.png"));
+	private final JButton btReturn = new Buttons().createButton("resources/pictures/buttons/return.png");
 	
 	@Override
 	public JPanel createPanel() {
@@ -40,6 +42,9 @@ public class ScoresPanel extends JPanel implements JPanelController {
 
 	@Override
 	public JPanel createMainPanel(int row, int column) {
+		JPanel bigPn = new JPanel();
+		bigPn.setBackground(Color.decode("#8cb404"));
+		bigPn.setLayout(new GridLayout(2, 1));
 		JPanel pn = new JPanel();
 		pn.setBackground(Color.decode("#8cb404"));
 		pn.setLayout(new GridLayout(row, column));
@@ -48,19 +53,21 @@ public class ScoresPanel extends JPanel implements JPanelController {
 		pn.add(score);
 		pn.add(timer);
 		pn.add(player);
-		List<String> scoresList = new ArrayList<>();
-		scoresList = new BestScore().getScores();
-		Font font = new Font("Arial", Font.BOLD, 20);
-		for(int i = 0; i < scoresList.size(); i++) {
-			String text = scoresList.get(i);
-			JLabel temp = new JLabel("<html><div style='text-align: center;'>" + text + "</div></html>");
-			temp.setBackground(Color.decode("#8cb404"));
-			temp.setOpaque(true);
-			temp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-			temp.setFont(font);
-			pn.add(temp);
-		}
-		return pn;
+//		List<String> scoresList = new ArrayList<>();
+//		scoresList = new BestScore().getScores();
+//		Font font = new Font("Arial", Font.BOLD, 20);
+//		for(int i = 0; i < scoresList.size(); i++) {
+//			String text = scoresList.get(i);
+//			JLabel temp = new JLabel("<html><div style='text-align: center;'>" + text + "</div></html>");
+//			temp.setBackground(Color.decode("#8cb404"));
+//			temp.setOpaque(true);
+//			temp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+//			temp.setFont(font);
+//			pn.add(temp);
+//		}
+		bigPn.add(pn);
+		bigPn.add(btReturn);
+		return bigPn;
 	}
 
 }
