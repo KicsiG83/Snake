@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JTextPane;
 
+import hu.ak_akademia.snake.gameboard.Buttons;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
@@ -17,8 +19,12 @@ import hu.ak_akademia.snake.model.Snake;
 public class DemoController extends SnakeController implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private JButton btExit = new JButton();
 	public DemoController(Snake snake, Board board, JTextPane screen, TextField scoring, Player player) {
 		super(snake, board, screen, scoring, player);
+		btExit = new Buttons().createButton("resources/pictures/buttons/exit.png");
+		btExit.setFocusable(true);
+		btExit.addActionListener(this);
 	}
 
 	@Override
@@ -36,6 +42,10 @@ public class DemoController extends SnakeController implements ActionListener {
 		move();
 		screen.setText(board.toString());
 		scoring.setText(player.toString());
+		if(e.getSource().equals(btExit)) {
+			setVisible(false);
+			System.exit(0);
+		}
 	}
 
 	private void move() {

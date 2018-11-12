@@ -52,7 +52,7 @@ public class Controller extends JPanel {
 		SnakeListener listener = new SnakeListener(sc);
 		snakeFrame.addKeyListener(listener);
 		sc.timer.start();
-		screen.setFont(new Font("Monospaced", 0, 12));
+		screen.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 		snakeFrame.add(scoring, BorderLayout.NORTH);
 		snakeFrame.add(screen);
 		snakeFrame.setVisible(true);

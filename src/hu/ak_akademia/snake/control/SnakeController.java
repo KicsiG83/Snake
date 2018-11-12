@@ -2,17 +2,21 @@ package hu.ak_akademia.snake.control;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
+import hu.ak_akademia.snake.gameboard.Buttons;
 import hu.ak_akademia.snake.gameboard.GameOver;
+import hu.ak_akademia.snake.gameboard.MainBoard;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
@@ -30,11 +34,14 @@ public class SnakeController extends JPanel implements ActionListener {
 	protected FoodFactory food;
 	protected Timer timer;
 	protected boolean end;
+	private JButton btReturn = new Buttons().createButton("resources/pictures/buttons/return.png");
+	private JButton btExit = new Buttons().createButton("resources/pictures/buttons/exit.png");
 	private JPanel pn = new JPanel();
 	JTextPane screen;
 	TextField scoring;
 
-	public SnakeController(Snake snakeParam, Board boardParam, JTextPane screenParam, TextField scoringParam, Player player) {
+	public SnakeController(Snake snakeParam, Board boardParam, JTextPane screenParam, TextField scoringParam,
+			Player player) {
 		snake = snakeParam;
 		board = boardParam;
 		screen = screenParam;
@@ -43,12 +50,20 @@ public class SnakeController extends JPanel implements ActionListener {
 		food = new FoodFactory(boardParam);
 		this.player = player;
 		screen.setLayout(new BorderLayout());
-        screen.setBorder(new EmptyBorder(10, 10, 10, 10));
+		screen.setFont(new Font("monospaced", Font.PLAIN, 10));
+		screen.setBorder(new EmptyBorder(10, 10, 10, 10));
 		screen.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		int startRow = boardParam.getFields().length / 2;
 		int startColoum = snake.getLength() + 2;
 		SnakePiece lastPiece = snake.getHead();
 		pn.add(screenParam);
+		JPanel buttonPn = new JPanel();
+		buttonPn.setBackground(Color.decode("#8cb404"));
+		btReturn.addActionListener(this);
+		btExit.addActionListener(this);
+		buttonPn.add(btReturn);
+		buttonPn.add(btExit);
+		screen.add(buttonPn, BorderLayout.SOUTH);
 		add(pn);
 		while (lastPiece.getPointer() != null) {
 			lastPiece.setCoorX(startRow);
@@ -78,6 +93,12 @@ public class SnakeController extends JPanel implements ActionListener {
 		if (!end) {
 			screen.setText(board.toString());
 			scoring.setText(player.toString());
+		} else if (e.getSource().equals(btReturn)) {
+			this.setVisible(false);
+			new MainBoard();
+		}else if (e.getSource().equals(btExit)) {
+			setVisible(false);
+			System.exit(0);
 		}
 	}
 

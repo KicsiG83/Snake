@@ -33,7 +33,7 @@ public class FoodFactory {
 		int column = board.getFields()[0].length;
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < column; j++) {
-				if(board.getFields()[i][j].getState().equals(FieldState.FREE)) {
+				if((FieldState.FREE).equals(board.getFields()[i][j].getState())) {
 					Integer[] addMe = {i,j};
 					result.add(addMe);
 				}

@@ -2,14 +2,12 @@ package hu.ak_akademia.snake.gameboard;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import hu.ak_akademia.snake.control.Controller;
@@ -21,26 +19,26 @@ public class MainBoard extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private Player player = new Player();
-	private final JButton btGame = new JButton(new ImageIcon("resources/pictures/buttons/game.png"));
-	private final JButton btDemo = new JButton(new ImageIcon("resources/pictures/buttons/demo.png"));
-	private final JButton btScores = new JButton(new ImageIcon("resources/pictures/buttons/scores.png"));
-	private final JButton btExit = new JButton(new ImageIcon("resources/pictures/buttons/exit.png"));
-	private final JButton btBoard1 = new JButton(new ImageIcon("resources/pictures/boards/01.png"));
-	private final JButton btBoard2 = new JButton(new ImageIcon("resources/pictures/boards/02.png"));
-	private final JButton btBoard3 = new JButton(new ImageIcon("resources/pictures/boards/03.png"));
-	private final JButton btBoard4 = new JButton(new ImageIcon("resources/pictures/boards/04.png"));
-	private final JButton btBoard5 = new JButton(new ImageIcon("resources/pictures/boards/05.png"));
-	private final JButton btBoard6 = new JButton(new ImageIcon("resources/pictures/boards/06.png"));
-	private final JButton btBoard7 = new JButton(new ImageIcon("resources/pictures/boards/07.png"));
-	private final JButton btBoard8 = new JButton(new ImageIcon("resources/pictures/boards/08.png"));
-	private final JButton btBoard9 = new JButton(new ImageIcon("resources/pictures/boards/09.png"));
-	private final JButton btBoard10 = new JButton(new ImageIcon("resources/pictures/boards/10.png"));
-	private final JButton btReturn = new JButton(new ImageIcon("resources/pictures/buttons/return.png"));
+	private JButton btGame = new JButton();
+	private JButton btDemo = new JButton();
+	private JButton btScores = new JButton();
+	private JButton btExit = new JButton();
+	private JButton btBoard1 = new JButton();
+	private JButton btBoard2 = new JButton();
+	private JButton btBoard3 = new JButton();
+	private JButton btBoard4 = new JButton();
+	private JButton btBoard5 = new JButton();
+	private JButton btBoard6 = new JButton();
+	private JButton btBoard7 = new JButton();
+	private JButton btBoard8 = new JButton();
+	private JButton btBoard9 = new JButton();
+	private JButton btBoard10 = new JButton();
+	private JButton btReturn = new JButton();
+	private JPanel mainPanel = new JPanel();
 	private JPanel gameSelectMainPanel = new JPanel();
-	private JPanel pn = new JPanel();
-	private JPanel gsb = new JPanel();
 
 	public MainBoard() {
+		player = new Player();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("A&K Snake");
 		setSize(1920, 1080);
@@ -50,95 +48,64 @@ public class MainBoard extends JFrame implements ActionListener {
 		setIconImage(new ImageIcon("resources/pictures/background/snake-icon.png").getImage());
 		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());
-		add(new JLabel(new ImageIcon("resources/pictures/background/snakeMainPicture.png")), BorderLayout.NORTH);
-		add(new JLabel(new ImageIcon("resources/pictures/background/menuLittle.jpg")), BorderLayout.WEST);
-		add(new JLabel(new ImageIcon("resources/pictures/background/menuLittle.jpg")), BorderLayout.EAST);
-		add(createMainPanel());
-		add(new JLabel(new ImageIcon("resources/pictures/background/menuSouthPicture.png")), BorderLayout.SOUTH);
+		mainPanel = new MainPanel().createPanel();
+		setMainButtons();
+		add(mainPanel, BorderLayout.CENTER);
 		setVisible(true);
 	}
 
-	private JPanel createGameSelectPanel() {
-		player = new Player();
-		setBackground(Color.decode("#8cb404"));
-		gameSelectMainPanel.setBackground(Color.decode("#8cb404"));
-		btBoard1.addActionListener(this);
-		btBoard1.setBackground(Color.decode("#8cb404"));
-		btBoard2.addActionListener(this);
-		btBoard2.setBackground(Color.decode("#8cb404"));
-		btBoard3.addActionListener(this);
-		btBoard3.setBackground(Color.decode("#8cb404"));
-		btBoard4.addActionListener(this);
-		btBoard4.setBackground(Color.decode("#8cb404"));
-		btBoard5.addActionListener(this);
-		btBoard5.setBackground(Color.decode("#8cb404"));
-		btBoard6.addActionListener(this);
-		btBoard6.setBackground(Color.decode("#8cb404"));
-		btBoard7.addActionListener(this);
-		btBoard7.setBackground(Color.decode("#8cb404"));
-		btBoard8.addActionListener(this);
-		btBoard8.setBackground(Color.decode("#8cb404"));
-		btBoard9.addActionListener(this);
-		btBoard9.setBackground(Color.decode("#8cb404"));
-		btBoard10.addActionListener(this);
-		btBoard10.setBackground(Color.decode("#8cb404"));
-		btReturn.addActionListener(this);
-		gsb.setLayout(new GridLayout(5, 2));
-		gsb.add(btBoard1);
-		gsb.add(btBoard2);
-		gsb.add(btBoard3);
-		gsb.add(btBoard4);
-		gsb.add(btBoard5);
-		gsb.add(btBoard6);
-		gsb.add(btBoard7);
-		gsb.add(btBoard8);
-		gsb.add(btBoard9);
-		gsb.add(btBoard10);
-		gameSelectMainPanel.add(gsb);
-		gameSelectMainPanel.add(createReturnPanel());
-		return gameSelectMainPanel;
-	}
-
-	private JPanel createReturnPanel() {
-		JPanel returnPanel = new JPanel();
-		returnPanel.setBackground(Color.decode("#8cb404"));
-		btReturn.setBackground(Color.decode("#8cb404"));
-		returnPanel.add(btReturn);
-		return returnPanel;
-	}
-
-	private JPanel createMainPanel() {
+	private void setMainButtons() {
+		JPanel temp = (JPanel) mainPanel.getComponent(1);
+		btGame = (JButton) temp.getComponent(0);
 		btGame.addActionListener(this);
-		btGame.setBackground(Color.decode("#8cb404"));
+		btDemo = (JButton) temp.getComponent(1);
 		btDemo.addActionListener(this);
-		btDemo.setBackground(Color.decode("#8cb404"));
+		btScores = (JButton) temp.getComponent(2);
 		btScores.addActionListener(this);
-		btScores.setBackground(Color.decode("#8cb404"));
+		btExit = (JButton) temp.getComponent(3);
 		btExit.addActionListener(this);
-		btExit.setBackground(Color.decode("#8cb404"));
-		pn.setLayout(new GridLayout(4, 1));
-		pn.add(btGame);
-		pn.add(btDemo);
-		pn.add(btScores);
-		pn.add(btExit);
-		return pn;
 	}
-
+	
+	private void setGameSelectButtons() {
+		JPanel buttonPanel = (JPanel) gameSelectMainPanel.getComponent(1);
+		JPanel firstPanel = (JPanel) buttonPanel .getComponent(0);
+		JPanel secondPanel = (JPanel) buttonPanel .getComponent(1);
+		btBoard1 = (JButton) firstPanel.getComponent(0);
+		btBoard1.addActionListener(this);
+		btBoard2 = (JButton) firstPanel.getComponent(1);
+		btBoard2.addActionListener(this);
+		btBoard3 = (JButton) firstPanel.getComponent(2);
+		btBoard3.addActionListener(this);
+		btBoard4 = (JButton) firstPanel.getComponent(3);
+		btBoard4.addActionListener(this);
+		btBoard5 = (JButton) firstPanel.getComponent(4);
+		btBoard5.addActionListener(this);
+		btBoard6 = (JButton) firstPanel.getComponent(5);
+		btBoard6.addActionListener(this);
+		btBoard7 = (JButton) firstPanel.getComponent(6);
+		btBoard7.addActionListener(this);
+		btBoard8 = (JButton) firstPanel.getComponent(7);
+		btBoard8.addActionListener(this);
+		btBoard9 = (JButton) firstPanel.getComponent(8);
+		btBoard9.addActionListener(this);
+		btBoard10 = (JButton) firstPanel.getComponent(9);
+		btBoard10.addActionListener(this);
+		btReturn = (JButton) secondPanel.getComponent(0);
+		btReturn.addActionListener(this);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btGame)) {
-			jPanelController(pn, createGameSelectPanel());
+			gameSelectMainPanel = new GameSelectPanel().createPanel();
+			setGameSelectButtons();
+			jPanelController(mainPanel, gameSelectMainPanel);
 		} else if (e.getSource().equals(btDemo)) {
 			callController("resources/boards/demoBoard.txt", 0);
 		} else if (e.getSource().equals(btScores)) {
 			
-			/**
-			 * TODO Össze kell kötni a DB-vel és a megjelenítésre alkalmas frame-et
-			 * összeállítani
-			 */
-		
 		} else if (e.getSource().equals(btReturn)) {
-			jPanelController(gameSelectMainPanel, createMainPanel());
+			jPanelController(gameSelectMainPanel, new MainPanel().createPanel());
 		} else if (e.getSource().equals(btBoard1)) {
 			player.setSelectedBoard(1);
 			callController("resources/boards/emptyBoard.txt", 1);

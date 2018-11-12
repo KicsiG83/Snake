@@ -1,7 +1,8 @@
 package hu.ak_akademia.snake.model;
 
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class ReadBoardFromFile {
 	private static String test = "";
@@ -12,14 +13,15 @@ public class ReadBoardFromFile {
 	}
 
 	private static String ReadEntireFileIntoAStringCharByChar(String pathToFile) throws IOException {
+		FileInputStream fis = new FileInputStream(pathToFile);
+		InputStreamReader read = new InputStreamReader(fis, "UTF-8");
 
-		FileReader fileReader = new FileReader(pathToFile);
 		String fileContents = "";
 		int i;
-		while ((i = fileReader.read()) != -1) {
+		while ((i = read.read()) != -1) {
 			fileContents = fileContents + (char) i;
 		}
-		fileReader.close();
+		read.close();
 		return fileContents;
 	}
 
@@ -31,7 +33,7 @@ public class ReadBoardFromFile {
 			e.printStackTrace();
 		}
 		test = str;
-		String[] splitedtest = test.split("\n");
+		String[] splitedtest = test.split("[\\r\\n]+");
 		int n = splitedtest.length;
 		int m = splitedtest[0].length();
 		char[][] result = new char[n][m];
