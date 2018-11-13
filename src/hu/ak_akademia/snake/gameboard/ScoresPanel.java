@@ -23,10 +23,9 @@ public class ScoresPanel extends JPanel implements JPanelController {
 	private final JLabel player = new JLabel(new ImageIcon("resources/pictures/background/player.png"));
 	private final JLabel score = new JLabel(new ImageIcon("resources/pictures/background/scores.png"));
 	private final JLabel timer = new JLabel(new ImageIcon("resources/pictures/background/timer.png"));
-	private final JButton btReturn = new Buttons().createButton("resources/pictures/buttons/return.png");
 	
 	@Override
-	public JPanel createPanel() {
+	public JPanel createPanel(JButton[] buttons) {
 		player.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		score.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		timer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
@@ -43,12 +42,12 @@ public class ScoresPanel extends JPanel implements JPanelController {
 		pn.setLayout(new GridLayout(3, 1));
 		pn.add(new JLabel(new ImageIcon("resources/pictures/background/snakeMainPicture.png")), BorderLayout.NORTH);
 		pn.add(headerPn);
-		pn.add(createMainPanel(10, 4), BorderLayout.SOUTH);
+		pn.add(createMainPanel(10, 4, buttons), BorderLayout.SOUTH);
 		return pn;
 	}
 
 	@Override
-	public JPanel createMainPanel(int row, int column) {
+	public JPanel createMainPanel(int row, int column, JButton[] buttons) {
 		JPanel bigPn = new CreateJPanel().createPanel();
 		JPanel pn = new CreateJPanel().createPanel();
 		bigPn.setLayout(new GridLayout(2, 1));
@@ -66,7 +65,7 @@ public class ScoresPanel extends JPanel implements JPanelController {
 			pn.add(temp);
 		}
 		bigPn.add(pn);
-		bigPn.add(btReturn);
+		bigPn.add(buttons[0]);
 		return bigPn;
 	}
 

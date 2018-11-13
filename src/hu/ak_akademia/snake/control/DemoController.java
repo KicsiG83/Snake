@@ -39,7 +39,7 @@ public class DemoController extends SnakeController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		move();
+		snakeMovever();
 		screen.setText(board.toString());
 		scoring.setText(player.toString());
 		if(e.getSource().equals(btExit)) {
@@ -48,7 +48,7 @@ public class DemoController extends SnakeController implements ActionListener {
 		}
 	}
 
-	private void move() {
+	public void snakeMovever() {
 		int[] nextFieldCoors = getNextFieldCoors();
 		switch (checkNextField()) {
 		case COLLECTABLE:

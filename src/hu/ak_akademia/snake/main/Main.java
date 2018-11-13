@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 import hu.ak_akademia.snake.gameboard.MainBoard;
 
-public class Main extends JFrame{
+public class Main extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -13,6 +13,8 @@ public class Main extends JFrame{
 	}
 
 	private void run() {
-		 new MainBoard();
+			
+		new MainBoard();
+
 	}
 }

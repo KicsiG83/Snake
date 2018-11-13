@@ -96,24 +96,18 @@ public class SnakeController extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		move();
+		snakeMovever();
 		if (!end) {
 			screen.setText(board.toString());
 			scoring.setText(player.toString());
-		} else if (e.getSource().equals(btReturn)) {
-			this.setVisible(false);
-			new MainBoard();
-		}else if (e.getSource().equals(btExit)) {
-			setVisible(false);
-			System.exit(0);
-		}
+		} 
 	}
 
 	private void placeSnakePieceToBoard(int row, int coloum, SnakePiece piece) {
 		board.getFields()[row][coloum] = piece.getPiece();
 	}
 
-	private void move() {
+	public void snakeMovever() {
 		int[] nextFieldCoors = getNextFieldCoors();
 		switch (checkNextField()) {
 		case COLLECTABLE:
@@ -160,7 +154,7 @@ public class SnakeController extends JPanel implements ActionListener {
 		end = true;
 		timer.stop();
 		screen.setText(""); // MAGIC
-		screen.add(new GameOverPanel(player).createPanel());
+		screen.add(new GameOverPanel(player).createPanel(MainBoard.getGameOverButtons()));
 		setVisible(true);
 	}
 

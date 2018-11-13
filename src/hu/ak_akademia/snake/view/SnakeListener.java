@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 import hu.ak_akademia.snake.control.SnakeController;
 import hu.ak_akademia.snake.model.Direction;
 
-public class SnakeListener extends KeyAdapter implements KeyListener {
+public class SnakeListener extends KeyAdapter implements KeyListener{
 	private SnakeController sc;
 
 	public SnakeListener(SnakeController sc) {

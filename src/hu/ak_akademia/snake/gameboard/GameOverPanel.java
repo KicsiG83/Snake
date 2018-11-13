@@ -19,9 +19,6 @@ public class GameOverPanel extends JPanel implements JPanelController {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField playerNameTF = new JTextField("", 20);
-	private JButton btOk = new Buttons().createButton("resources/pictures/buttons/ok.png");
-	private JButton btExit = new Buttons().createButton("resources/pictures/buttons/gameOverExit.png");
-	private JButton btReturn = new Buttons().createButton("resources/pictures/buttons/return.png");
 	private JLabel lbGetName = new JLabel("Játékos neve");
 	private JLabel lbScore;
 	private Player player;
@@ -31,20 +28,20 @@ public class GameOverPanel extends JPanel implements JPanelController {
 	}
 
 	@Override
-	public JPanel createPanel() {
+	public JPanel createPanel(JButton[] buttons) {
 		JPanel pn = new CreateJPanel().createPanel();
 		pn.setLayout(new BorderLayout(3, 1));
 		pn.add(new JLabel(new ImageIcon("resources/pictures/background/gameOver.png")), BorderLayout.NORTH);
-		pn.add(createMainPanel(1, 6), BorderLayout.CENTER);
+		pn.add(createMainPanel(1, 6, buttons), BorderLayout.CENTER);
 		pn.add(new JLabel(new ImageIcon("resources/pictures/background/menuSouthPicture.png")), BorderLayout.SOUTH);
 		return pn;
 	}
 
 	@Override
-	public JPanel createMainPanel(int row, int column) {
+	public JPanel createMainPanel(int row, int column, JButton[] buttons) {
 		JPanel dataPn = new CreateJPanel().createPanel();
 		dataPn.setLayout(new FlowLayout());
-		dataPn.add(createGameOverPanel(createGetInputPanel()));
+		dataPn.add(createGameOverPanel(createGetInputPanel(buttons)));
 		return dataPn;
 	}
 
@@ -69,7 +66,7 @@ public class GameOverPanel extends JPanel implements JPanelController {
 		return gameOverPn;
 	}
 
-	private JPanel createGetInputPanel() {
+	private JPanel createGetInputPanel(JButton[] buttons) {
 		JPanel getInput = new CreateJPanel().createPanel();
 		lbGetName.setFont(new Font("Ariel", 0, 30));
 		lbScore = new JLabel("Elért pontszám: " + player.getPoint());
@@ -81,13 +78,14 @@ public class GameOverPanel extends JPanel implements JPanelController {
 			lbGetName.setHorizontalAlignment(JLabel.CENTER);
 			getInput.add(lbGetName);
 			getInput.add(playerNameTF);
-			getInput.add(btOk);
-			getInput.add(btReturn);
-			getInput.add(btExit);
+			for (int i = 0; i < buttons.length; i++) {
+				getInput.add(buttons[i]);
+			}
 		} else {
 			getInput.setLayout(new GridLayout(3, 1));
-			getInput.add(btReturn);
-			getInput.add(btExit);
+			for (int i = 1; i < buttons.length; i++) {
+				getInput.add(buttons[i]);
+			}
 		}
 		return getInput;
 	}
