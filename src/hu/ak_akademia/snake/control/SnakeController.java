@@ -15,6 +15,7 @@ import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
 import hu.ak_akademia.snake.gameboard.Buttons;
+import hu.ak_akademia.snake.gameboard.CreateJPanel;
 import hu.ak_akademia.snake.gameboard.GameOverPanel;
 import hu.ak_akademia.snake.gameboard.MainBoard;
 import hu.ak_akademia.snake.model.Board;
@@ -49,6 +50,13 @@ public class SnakeController extends JPanel implements ActionListener {
 		timer = new Timer(100, this);
 		food = new FoodFactory(boardParam);
 		this.player = player;
+
+		/**TODO
+		 * HIBA!!!
+		 * Jelenleg a snake-et nem lehet irányítani, mert a JFrame nem kapja meg az irányítást.
+		 * Az itteni actionPerformed-et át kell szervezni a MainBoard-ra!
+		 */
+		
 		screen.setLayout(new BorderLayout());
 		screen.setFont(new Font("monospaced", Font.PLAIN, 10));
 		screen.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -57,8 +65,7 @@ public class SnakeController extends JPanel implements ActionListener {
 		int startColoum = snake.getLength() + 2;
 		SnakePiece lastPiece = snake.getHead();
 		pn.add(screenParam);
-		JPanel buttonPn = new JPanel();
-		buttonPn.setBackground(Color.decode("#8cb404"));
+		JPanel buttonPn = new CreateJPanel().createPanel();
 		btReturn.addActionListener(this);
 		btExit.addActionListener(this);
 		buttonPn.add(btReturn);
@@ -153,7 +160,7 @@ public class SnakeController extends JPanel implements ActionListener {
 		end = true;
 		timer.stop();
 		screen.setText(""); // MAGIC
-		screen.add(new GameOverPanel(player));
+		screen.add(new GameOverPanel(player).createPanel());
 		setVisible(true);
 	}
 

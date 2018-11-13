@@ -22,8 +22,7 @@ public class GameSelectPanel implements JPanelController{
 	
 	@Override
 	public JPanel createPanel() {
-		JPanel pn = new JPanel();
-		pn.setBackground(Color.decode("#8cb404"));
+		JPanel pn = new CreateJPanel().createPanel();
 		pn.add(snakeMainPicture, BorderLayout.NORTH);
 		pn.add(createMainPanel(5, 2), BorderLayout.CENTER);
 		pn.add(menuSouthPicture, BorderLayout.SOUTH);
@@ -32,10 +31,8 @@ public class GameSelectPanel implements JPanelController{
 
 	@Override
 	public JPanel createMainPanel(int row, int column) {
-		JPanel gameSelectMainPanel = new JPanel();
-		JPanel gsb = new JPanel();
-		gameSelectMainPanel.setBackground(Color.decode("#8cb404"));
-		gsb.setBackground(Color.decode("#8cb404"));
+		JPanel gameSelectMainPanel = new CreateJPanel().createPanel();
+		JPanel gsb = new CreateJPanel().createPanel();
 		gsb.setLayout(new GridLayout(row, column));
 		gsb.add(btBoard1);
 		gsb.add(btBoard2);

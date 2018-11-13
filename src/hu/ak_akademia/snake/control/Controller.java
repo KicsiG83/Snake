@@ -5,11 +5,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.TextField;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import hu.ak_akademia.snake.gameboard.CreateJPanel;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.Snake;
@@ -24,9 +26,8 @@ public class Controller extends JPanel {
 	}
 	
 	public JPanel start(Board field, int index) {
-		JPanel pn = new JPanel();
-		pn.setSize(1920, 1080);
-		pn.setBackground(Color.decode("#8cb404"));
+		JPanel pn = new CreateJPanel().createPanel();
+		pn.setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
 		JTextPane screen = new JTextPane();
 		TextField scoring = new TextField();
 		screen.setBackground(Color.decode("#8cb404"));
