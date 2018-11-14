@@ -2,17 +2,19 @@ package hu.ak_akademia.snake.control;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.TextField;
+import java.awt.GridLayout;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import javax.swing.WindowConstants;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import hu.ak_akademia.snake.gameboard.CreateJPanel;
+import hu.ak_akademia.snake.gameboard.MainBoard;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.Snake;
@@ -21,41 +23,49 @@ import hu.ak_akademia.snake.view.SnakeListener;
 public class Controller extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private final ImageIcon icon = new ImageIcon("resources/snake-icon.png");
-	Player player = new Player();
+	
+	private int selectedBoardIndex;
+	private SnakeController sc;
+	Player player = new Player(selectedBoardIndex);
 
 	public Controller(Player player) {
 		this.player = player;
+		selectedBoardIndex = player.getSelectedBoard();
 	}
-	
-	public void start(Board field, int index) {
-		JFrame snakeFrame = new JFrame("A&K - Snake");
-		snakeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		snakeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		snakeFrame.setIconImage(icon.getImage());
-		snakeFrame.setResizable(false);
-		snakeFrame.setSize(1920, 1080);
+
+	public JPanel start(Board field, int index) {
+		JPanel mainPn = new CreateJPanel().createPanel();
+		mainPn.setLayout(new FlowLayout());
+		JPanel northPn = new CreateJPanel().createPanel();
+		northPn.setLayout(new GridLayout(1, 1));
+		JPanel southPn = new CreateJPanel().createPanel();
+		southPn.setLayout(new GridLayout(1, 1));
+		northPn.setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
 		JTextPane screen = new JTextPane();
-		TextField scoring = new TextField();
-		screen.setBackground(new Color(141, 181, 5));
+		JLabel scoring = new JLabel();
+		scoring.setHorizontalAlignment(JLabel.CENTER);
+		screen.setBackground(Color.decode("#8cb404"));
 		SimpleAttributeSet attribs = new SimpleAttributeSet();
 		StyleConstants.setAlignment(attribs, StyleConstants.ALIGN_CENTER);
 		screen.setParagraphAttributes(attribs, true);
 		Snake snake = new Snake(3);
-		snakeFrame.setLocationRelativeTo(null);
-		SnakeController sc;
 		if (index == 0) {
 			sc = new DemoController(snake, field, screen, scoring, player);
 		} else {
 			sc = new SnakeController(snake, field, screen, scoring, player);
 		}
-		SnakeListener listener = new SnakeListener(sc);
-		snakeFrame.addKeyListener(listener);
 		sc.timer.start();
 		screen.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-		snakeFrame.add(scoring, BorderLayout.NORTH);
-		snakeFrame.add(screen);
-		snakeFrame.setVisible(true);
-		snakeFrame.setFocusable(true);
+		screen.addKeyListener(new SnakeListener(sc));
+		northPn.add(scoring, BorderLayout.CENTER);
+		southPn.add(screen);
+		mainPn.add(northPn);		
+		mainPn.add(southPn);
+		JPanel buttonPn = new CreateJPanel().createPanel();
+		for(int i = 0; i < MainBoard.snakeControllerButtons.length; i++) {
+			buttonPn.add(MainBoard.snakeControllerButtons[i]);
+		}
+		screen.add(buttonPn, BorderLayout.SOUTH);
+		return mainPn;
 	}
 }

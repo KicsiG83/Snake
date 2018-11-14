@@ -5,22 +5,18 @@ public class Player {
 	private long time;
 	private int point;
 	private long startTime = System.currentTimeMillis();
-	private int selectedBoard = 0;
+	private int selectedBoard;
 
+	public Player(int boardIndex) {
+		selectedBoard = boardIndex;
+	}
+	
 	public int getSelectedBoard() {
 		return selectedBoard;
 	}
 
-	public void setSelectedBoard(int selectedBoard) {
-		this.selectedBoard = selectedBoard;
-	}
-
 	public long getTime() {
 		return time;
-	}
-
-	public void setTime(long time) {
-		this.time = time;
 	}
 
 	public int getPoint() {
@@ -33,6 +29,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Time: " + (System.currentTimeMillis() - startTime) / 1000 + "s  Points: " + point;
+		time = (System.currentTimeMillis() - startTime) / 1000;
+		return "Time: " + time + "s Points: " + point;
 	}
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -24,43 +25,48 @@ public class ScoresPanel extends JPanel implements JPanelController {
 	private final JLabel timer = new JLabel(new ImageIcon("resources/pictures/background/timer.png"));
 	
 	@Override
-	public JPanel createPanel() {
-		player.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-		score.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-		timer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-		playGround.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+	public JPanel createPanel(JButton[] buttons) {
+		player.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		score.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		timer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		playGround.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		scores.setFont(new Font("monospaced", 0, 20));
-		JPanel pn = new JPanel();
-		pn.setBackground(Color.decode("#8cb404"));
+		JPanel headerPn = new CreateJPanel().createPanel();
+		headerPn.setLayout(new GridLayout(1, 4));
+		headerPn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		headerPn.add(playGround);
+		headerPn.add(score);
+		headerPn.add(timer);
+		headerPn.add(player);
+		JPanel pn = new CreateJPanel().createPanel();
+		pn.setLayout(new GridLayout(3, 1));
 		pn.add(new JLabel(new ImageIcon("resources/pictures/background/snakeMainPicture.png")), BorderLayout.NORTH);
-		pn.add(createMainPanel(1, 4), BorderLayout.CENTER);
-		pn.add(new JLabel(new ImageIcon("resources/pictures/background/menuSouthPicture.png")), BorderLayout.SOUTH);
+		pn.add(headerPn);
+		pn.add(createMainPanel(10, 4, buttons), BorderLayout.SOUTH);
 		return pn;
 	}
 
 	@Override
-	public JPanel createMainPanel(int row, int column) {
-		JPanel pn = new JPanel();
-		pn.setBackground(Color.decode("#8cb404"));
+	public JPanel createMainPanel(int row, int column, JButton[] buttons) {
+		JPanel bigPn = new CreateJPanel().createPanel();
+		JPanel pn = new CreateJPanel().createPanel();
+		bigPn.setLayout(new GridLayout(2, 1));
 		pn.setLayout(new GridLayout(row, column));
-		pn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-		pn.add(playGround);
-		pn.add(score);
-		pn.add(timer);
-		pn.add(player);
 		List<String> scoresList = new ArrayList<>();
 		scoresList = new BestScore().getScores();
-		Font font = new Font("Arial", Font.BOLD, 20);
+		Font font = new Font("Arial", 0, 20);
 		for(int i = 0; i < scoresList.size(); i++) {
-			String text = scoresList.get(i);
-			JLabel temp = new JLabel("<html><div style='text-align: center;'>" + text + "</div></html>");
+			JLabel temp = new JLabel(scoresList.get(i));
+			temp.setHorizontalAlignment(JLabel.CENTER);
 			temp.setBackground(Color.decode("#8cb404"));
 			temp.setOpaque(true);
-			temp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+			temp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 			temp.setFont(font);
 			pn.add(temp);
 		}
-		return pn;
+		bigPn.add(pn);
+		bigPn.add(buttons[0]);
+		return bigPn;
 	}
 
 }
