@@ -21,6 +21,7 @@ public class GameOverPanel extends JPanel implements JPanelController {
 	private JTextField playerNameTF = new JTextField("", 20);
 	private JLabel lbGetName = new JLabel("Játékos neve");
 	private JLabel lbScore;
+	private JLabel lbTime;
 	private Player player;
 
 	public GameOverPanel(Player player) {
@@ -52,8 +53,10 @@ public class GameOverPanel extends JPanel implements JPanelController {
 		switch (highScore.compareTo(playerScore)) {
 		case 1:
 			highscore = false;
+			break;
 		case 0:
 			highscore = false;
+			break;
 		case -1:
 			highscore = true;
 		}
@@ -73,19 +76,18 @@ public class GameOverPanel extends JPanel implements JPanelController {
 		lbScore.setHorizontalAlignment(JLabel.CENTER);
 		lbScore.setFont(new Font("Ariel", 0, 30));
 		getInput.add(lbScore, BorderLayout.CENTER);
+		lbTime = new JLabel("Teljesített idő: " + player.getTime());
+		lbTime.setHorizontalAlignment(JLabel.CENTER);
+		lbTime.setFont(new Font("Ariel", 0, 30));
+		getInput.add(lbTime, BorderLayout.CENTER);
 		if (checkNewHighscore(player)) {
-			getInput.setLayout(new GridLayout(6, 1));
+			getInput.setLayout(new GridLayout(5, 1));
 			lbGetName.setHorizontalAlignment(JLabel.CENTER);
 			getInput.add(lbGetName);
 			getInput.add(playerNameTF);
-			for (int i = 0; i < buttons.length; i++) {
-				getInput.add(buttons[i]);
-			}
+			getInput.add(buttons[0]);
 		} else {
-			getInput.setLayout(new GridLayout(3, 1));
-			for (int i = 1; i < buttons.length; i++) {
-				getInput.add(buttons[i]);
-			}
+			getInput.setLayout(new GridLayout(2, 1));
 		}
 		return getInput;
 	}

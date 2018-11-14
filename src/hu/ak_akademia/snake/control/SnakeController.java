@@ -1,21 +1,15 @@
 package hu.ak_akademia.snake.control;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
 
-import hu.ak_akademia.snake.gameboard.Buttons;
-import hu.ak_akademia.snake.gameboard.CreateJPanel;
 import hu.ak_akademia.snake.gameboard.GameOverPanel;
 import hu.ak_akademia.snake.gameboard.MainBoard;
 import hu.ak_akademia.snake.model.Board;
@@ -35,13 +29,11 @@ public class SnakeController extends JPanel implements ActionListener {
 	protected FoodFactory food;
 	protected Timer timer;
 	protected boolean end;
-	private JButton btReturn = new Buttons().createButton("resources/pictures/buttons/return.png");
-	private JButton btExit = new Buttons().createButton("resources/pictures/buttons/exit.png");
 	private JPanel pn = new JPanel();
 	JTextPane screen;
-	TextField scoring;
+	JLabel scoring;
 
-	public SnakeController(Snake snakeParam, Board boardParam, JTextPane screenParam, TextField scoringParam,
+	public SnakeController(Snake snakeParam, Board boardParam, JTextPane screenParam, JLabel scoringParam,
 			Player player) {
 		snake = snakeParam;
 		board = boardParam;
@@ -50,27 +42,12 @@ public class SnakeController extends JPanel implements ActionListener {
 		timer = new Timer(100, this);
 		food = new FoodFactory(boardParam);
 		this.player = player;
-
-		/**TODO
-		 * HIBA!!!
-		 * Jelenleg a snake-et nem lehet irányítani, mert a JFrame nem kapja meg az irányítást.
-		 * Az itteni actionPerformed-et át kell szervezni a MainBoard-ra!
-		 */
-		
 		screen.setLayout(new BorderLayout());
-		screen.setFont(new Font("monospaced", Font.PLAIN, 10));
-		screen.setBorder(new EmptyBorder(10, 10, 10, 10));
-		screen.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		screen.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 10));
 		int startRow = boardParam.getFields().length / 2;
 		int startColoum = snake.getLength() + 2;
 		SnakePiece lastPiece = snake.getHead();
 		pn.add(screenParam);
-		JPanel buttonPn = new CreateJPanel().createPanel();
-		btReturn.addActionListener(this);
-		btExit.addActionListener(this);
-		buttonPn.add(btReturn);
-		buttonPn.add(btExit);
-		screen.add(buttonPn, BorderLayout.SOUTH);
 		add(pn);
 		while (lastPiece.getPointer() != null) {
 			lastPiece.setCoorX(startRow);
@@ -100,7 +77,7 @@ public class SnakeController extends JPanel implements ActionListener {
 		if (!end) {
 			screen.setText(board.toString());
 			scoring.setText(player.toString());
-		} 
+		}
 	}
 
 	private void placeSnakePieceToBoard(int row, int coloum, SnakePiece piece) {
@@ -150,12 +127,17 @@ public class SnakeController extends JPanel implements ActionListener {
 		food.placeFood();
 	}
 
+	/**
+	 * TODO a scoring JLabel ott marad a gameOverPanelen, meg kell nézni miért!
+	 */
 	private void gameOver() {
 		end = true;
 		timer.stop();
-		screen.setText(""); // MAGIC
-		screen.add(new GameOverPanel(player).createPanel(MainBoard.getGameOverButtons()));
+		screen.remove(scoring);
+		screen.add(new GameOverPanel(player).createPanel(MainBoard.gameOverButtons));
 		setVisible(true);
+		revalidate();
+		repaint();
 	}
 
 	private FieldState checkNextField() {
