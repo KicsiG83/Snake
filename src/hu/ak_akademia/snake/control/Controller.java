@@ -2,11 +2,9 @@ package hu.ak_akademia.snake.control;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -23,7 +21,7 @@ import hu.ak_akademia.snake.view.SnakeListener;
 public class Controller extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int selectedBoardIndex;
 	private SnakeController sc;
 	Player player = new Player(selectedBoardIndex);
@@ -35,16 +33,16 @@ public class Controller extends JPanel {
 
 	public JPanel start(Board field, int index) {
 		JPanel mainPn = new CreateJPanel().createPanel();
-		mainPn.setLayout(new FlowLayout());
+		mainPn.setLayout(new GridLayout());
 		JPanel northPn = new CreateJPanel().createPanel();
 		northPn.setLayout(new GridLayout(1, 1));
 		JPanel southPn = new CreateJPanel().createPanel();
 		southPn.setLayout(new GridLayout(1, 1));
-		northPn.setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
 		JTextPane screen = new JTextPane();
 		JLabel scoring = new JLabel();
 		scoring.setHorizontalAlignment(JLabel.CENTER);
 		screen.setBackground(Color.decode("#8cb404"));
+		screen.add(scoring, BorderLayout.NORTH);
 		SimpleAttributeSet attribs = new SimpleAttributeSet();
 		StyleConstants.setAlignment(attribs, StyleConstants.ALIGN_CENTER);
 		screen.setParagraphAttributes(attribs, true);
@@ -57,12 +55,12 @@ public class Controller extends JPanel {
 		sc.timer.start();
 		screen.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 		screen.addKeyListener(new SnakeListener(sc));
-		northPn.add(scoring, BorderLayout.CENTER);
+//		northPn.add(scoring, BorderLayout.CENTER);
 		southPn.add(screen);
-		mainPn.add(northPn);		
+//		mainPn.add(northPn);
 		mainPn.add(southPn);
 		JPanel buttonPn = new CreateJPanel().createPanel();
-		for(int i = 0; i < MainBoard.snakeControllerButtons.length; i++) {
+		for (int i = 0; i < MainBoard.snakeControllerButtons.length; i++) {
 			buttonPn.add(MainBoard.snakeControllerButtons[i]);
 		}
 		screen.add(buttonPn, BorderLayout.SOUTH);

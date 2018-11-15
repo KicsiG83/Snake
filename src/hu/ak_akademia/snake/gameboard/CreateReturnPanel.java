@@ -11,7 +11,7 @@ public class CreateReturnPanel implements JPanelController {
 	public JPanel createPanel(JButton[] buttons) {
 		JPanel pn = new JPanel();
 		pn.setBackground(Color.decode("#8cb404"));
-		pn.add(buttons[10]);
+		pn.add(buttons[5]);
 		return pn;
 	}
 
