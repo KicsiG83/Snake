@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import hu.ak_akademia.snake.control.Controller;
+import hu.ak_akademia.snake.model.BestScore;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Player;
 import hu.ak_akademia.snake.model.ReadBoardFromFile;
@@ -180,6 +181,15 @@ public class MainBoard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				jPanelController(scorePanel, mainPanel);
 				repaint();
+			}
+		});
+		btGameOverOk.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				player.setName(GameOverPanel.getPlayerNameTF());
+				new BestScore().setBest(player.getSelectedBoard(), player.getPoint(), Integer.toString(player.getTime()), player.getName());
+				jPanelController(gameOverPanel, mainPanel);
 			}
 		});
 		btGameOverReturn.addActionListener(new ActionListener() {

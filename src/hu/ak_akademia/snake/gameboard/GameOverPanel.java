@@ -18,7 +18,7 @@ import hu.ak_akademia.snake.model.Score;
 public class GameOverPanel extends JPanel implements JPanelController {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField playerNameTF = new JTextField("", 20);
+	private static JTextField playerNameTF = new JTextField("", 20);
 	private JLabel lbGetName = new JLabel("Játékos neve");
 	private JLabel lbScore;
 	private JLabel lbTime;
@@ -26,6 +26,10 @@ public class GameOverPanel extends JPanel implements JPanelController {
 
 	public GameOverPanel(Player player) {
 		this.player = player;
+	}
+
+	public static String getPlayerNameTF() {
+		return playerNameTF.getText();
 	}
 
 	@Override

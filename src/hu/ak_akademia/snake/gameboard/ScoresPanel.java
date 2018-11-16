@@ -68,5 +68,4 @@ public class ScoresPanel extends JPanel implements JPanelController {
 		bigPn.add(buttons[0]);
 		return bigPn;
 	}
-
 }
