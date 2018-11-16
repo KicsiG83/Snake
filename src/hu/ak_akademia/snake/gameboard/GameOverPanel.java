@@ -18,7 +18,7 @@ import hu.ak_akademia.snake.model.Score;
 public class GameOverPanel extends JPanel implements JPanelController {
 
 	private static final long serialVersionUID = 1L;
-	private static JTextField playerNameTF = new JTextField("", 20);
+	private static JTextField playerNameTF = new JTextField("", 10);
 	private JLabel lbGetName = new JLabel("Játékos neve");
 	private JLabel lbScore;
 	private JLabel lbTime;
@@ -35,10 +35,9 @@ public class GameOverPanel extends JPanel implements JPanelController {
 	@Override
 	public JPanel createPanel(JButton[] buttons) {
 		JPanel pn = new CreateJPanel().createPanel();
-		pn.setLayout(new BorderLayout(3, 1));
-		pn.add(new JLabel(new ImageIcon("resources/pictures/background/gameOver.png")), BorderLayout.NORTH);
-		pn.add(createMainPanel(1, 6, buttons), BorderLayout.CENTER);
-		pn.add(new JLabel(new ImageIcon("resources/pictures/background/menuSouthPicture.png")), BorderLayout.SOUTH);
+		pn.setLayout(new BorderLayout());
+		pn.add(new JLabel(new ImageIcon("resources/pictures/background/gameOver.png")), BorderLayout.WEST);
+		pn.add(createMainPanel(0, 1, buttons), BorderLayout.CENTER);
 		return pn;
 	}
 
@@ -48,6 +47,31 @@ public class GameOverPanel extends JPanel implements JPanelController {
 		dataPn.setLayout(new FlowLayout());
 		dataPn.add(createGameOverPanel(createGetInputPanel(buttons)));
 		return dataPn;
+	}
+
+	private JPanel createGetInputPanel(JButton[] buttons) {
+		JPanel getInput = new CreateJPanel().createPanel();
+		getInput.setLayout(new GridLayout(0, 1, 5, 5));
+		lbGetName.setFont(new Font("Ariel", 0, 20));
+		lbScore = new JLabel("Elért pontszám: " + player.getPoint());
+		lbScore.setHorizontalAlignment(JLabel.CENTER);
+		lbScore.setFont(new Font("Ariel", 0, 20));
+		lbTime = new JLabel("Teljesített idő: " + player.getTime() + " mp");
+		lbTime.setHorizontalAlignment(JLabel.CENTER);
+		lbTime.setFont(new Font("Ariel", 0, 20));
+		if (checkNewHighscore(player)) {
+			getInput.add(lbScore, BorderLayout.CENTER);
+			getInput.add(lbTime, BorderLayout.CENTER);
+			lbGetName.setHorizontalAlignment(JLabel.CENTER);
+			getInput.add(lbGetName);
+			getInput.add(playerNameTF);
+			getInput.add(new CreateReturnPanel().createPanel(buttons, 0));
+		} else {
+			getInput.add(lbScore, BorderLayout.CENTER);
+			getInput.add(lbTime, BorderLayout.CENTER);
+			getInput.add(new CreateReturnPanel().createPanel(buttons, 1));
+		}
+		return getInput;
 	}
 
 	private boolean checkNewHighscore(Player player) {
@@ -71,28 +95,5 @@ public class GameOverPanel extends JPanel implements JPanelController {
 		JPanel gameOverPn = new CreateJPanel().createPanel();
 		gameOverPn.add(getInput, BorderLayout.CENTER);
 		return gameOverPn;
-	}
-
-	private JPanel createGetInputPanel(JButton[] buttons) {
-		JPanel getInput = new CreateJPanel().createPanel();
-		lbGetName.setFont(new Font("Ariel", 0, 30));
-		lbScore = new JLabel("Elért pontszám: " + player.getPoint());
-		lbScore.setHorizontalAlignment(JLabel.CENTER);
-		lbScore.setFont(new Font("Ariel", 0, 30));
-		getInput.add(lbScore, BorderLayout.CENTER);
-		lbTime = new JLabel("Teljesített idő: " + player.getTime());
-		lbTime.setHorizontalAlignment(JLabel.CENTER);
-		lbTime.setFont(new Font("Ariel", 0, 30));
-		getInput.add(lbTime, BorderLayout.CENTER);
-		if (checkNewHighscore(player)) {
-			getInput.setLayout(new GridLayout(5, 1));
-			lbGetName.setHorizontalAlignment(JLabel.CENTER);
-			getInput.add(lbGetName);
-			getInput.add(playerNameTF);
-			getInput.add(buttons[0]);
-		} else {
-			getInput.setLayout(new GridLayout(2, 1));
-		}
-		return getInput;
 	}
 }

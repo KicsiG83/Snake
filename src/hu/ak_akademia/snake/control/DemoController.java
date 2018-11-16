@@ -1,13 +1,18 @@
 package hu.ak_akademia.snake.control;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
+import hu.ak_akademia.snake.gameboard.MainBoard;
+import hu.ak_akademia.snake.gameboard.MainPanel;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
@@ -98,13 +103,29 @@ public class DemoController extends SnakeController implements ActionListener {
 		player.setPoint(player.getPoint() + 1);
 		snake.eat();
 		food.placeFood();
-
 	}
 
-	private void gameOver() {
+	/**
+	 * TODO 
+	 * A leállást követően vagy még előtte vizsgálni kell a vissza gombot! 
+	 * Cél a főmenü!
+	 */
+	public void gameOver() {
 		end = true;
 		timer.stop();
-		screen.setText("Game Over!");
+		setVisible(false);
+		removeAll();
+		screen.add(new MainPanel().createPanel(MainBoard.mainButtons));
+		try {
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_SPACE);
+	        robot.keyRelease(KeyEvent.VK_SPACE);
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
+		revalidate();
+		repaint();
+		
 	}
 
 	private FieldState checkNextField() {
