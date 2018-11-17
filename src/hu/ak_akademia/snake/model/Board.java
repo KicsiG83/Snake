@@ -12,32 +12,9 @@ public class Board {
 		int coloum = map[0].length;
 		fields = new BoardItem[row][coloum];
 
-		/**
-		 * TODO
-		 * Újratervezés
-		 * getFromCode by órai anyag
-		 */
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < coloum; j++) {
-				if (map[i][j] == ' ') {
-					fields[i][j] = (BoardItem.NO_ITEM);
-				} else if (map[i][j] == '|') {
-					fields[i][j] = (BoardItem.VERTICAL_WALL);
-				} else if (map[i][j] == '-') {
-					fields[i][j] = (BoardItem.HORIZONTAL_WALL);
-				} else if (map[i][j] == '+') {
-					fields[i][j] = (BoardItem.CORNER);
-			//	} else if (map[i][j] == 'X') {
-			//		fields[i][j] = (BoardItem.TOP_LEFT_CORNER);
-			//	} else if (map[i][j] == 'X') {
-			//		fields[i][j] = (BoardItem.TOP_RIGHT_CORNER);
-			//	} else if (map[i][j] == 'X') {
-			//		fields[i][j] = (BoardItem.BOTTOM_LEFT_CORNER);
-			//	} else if (map[i][j] == 'X') {
-			//		fields[i][j] = (BoardItem.BOTTOM_RIGHT_CORNER);
-				} else if (map[i][j] == 'X') {
-					fields[i][j] = (BoardItem.FIELD_WALL);
-				}
+				fields[i][j] = BoardItem.getFromCode(map[i][j]);
 			}
 		}
 	}

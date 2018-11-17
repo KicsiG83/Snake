@@ -3,18 +3,12 @@ package hu.ak_akademia.snake.model;
 public enum BoardItem {
 	NO_ITEM(' ',FieldState.FREE),
 	SNAKE_HEAD('O', FieldState.INUSE),
-	SNAKE_BODY('o', FieldState.INUSE),
+	SNAKE_BODY('¤', FieldState.INUSE),
 	HORIZONTAL_WALL('-',FieldState.INUSE),
 	VERTICAL_WALL('|',FieldState.INUSE),
 	CORNER('+',FieldState.INUSE),
-	FOOD('*',FieldState.COLLECTABLE),
-	
+	FOOD('o',FieldState.COLLECTABLE),	
 	FIELD_WALL('X',FieldState.INUSE);
-//	TOP_LEFT_CORNER('X',FieldState.INUSE),
-//	TOP_RIGHT_CORNER('X',FieldState.INUSE),
-//	BOTTOM_LEFT_CORNER('X',FieldState.INUSE),
-//	BOTTOM_RIGHT_CORNER('X',FieldState.INUSE);
-
 	
 	private final char sign;
 	private final FieldState state;
@@ -28,4 +22,13 @@ public enum BoardItem {
 	public FieldState getState() {
 		return state;
 	}
+	
+	public static BoardItem getFromCode(char sign) {
+        for (BoardItem status : values()) {
+            if (status.getSign()==sign) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("Érvénytelen pálya jel: " + sign);
+    }
 }
