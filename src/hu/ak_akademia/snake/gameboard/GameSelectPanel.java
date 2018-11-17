@@ -12,7 +12,7 @@ public class GameSelectPanel implements JPanelController {
 	public JPanel createPanel(JButton[] jbuttons) {
 		JPanel pn = new CreateJPanel().createPanel();
 		pn.add(snakeMainPicture, BorderLayout.NORTH);
-		pn.add(createMainPanel(5, 2, jbuttons), BorderLayout.CENTER);
+		pn.add(createMainPanel(6, 1, jbuttons), BorderLayout.CENTER);
 		pn.add(menuSouthPicture, BorderLayout.SOUTH);
 		return pn;
 	}
@@ -23,11 +23,10 @@ public class GameSelectPanel implements JPanelController {
 		gameSelectMainPanel.setLayout(new GridLayout(2, 1));
 		JPanel gsb = new CreateJPanel().createPanel();
 		gsb.setLayout(new GridLayout(row, column));
-		for (int i = 0; i < buttons.length-1; i++) {
+		for (int i = 0; i < buttons.length; i++) {
 			gsb.add(buttons[i]);
 		}
 		gameSelectMainPanel.add(gsb);
-		gameSelectMainPanel.add(new CreateReturnPanel().createPanel(buttons));
 		return gameSelectMainPanel;
 	}
 }

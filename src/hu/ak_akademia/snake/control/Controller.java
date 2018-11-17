@@ -2,18 +2,14 @@ package hu.ak_akademia.snake.control;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import hu.ak_akademia.snake.gameboard.CreateJPanel;
 import hu.ak_akademia.snake.gameboard.MainBoard;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Player;
@@ -23,7 +19,7 @@ import hu.ak_akademia.snake.view.SnakeListener;
 public class Controller extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int selectedBoardIndex;
 	private SnakeController sc;
 	Player player = new Player(selectedBoardIndex);
@@ -34,15 +30,10 @@ public class Controller extends JPanel {
 	}
 
 	public JPanel start(Board field, int index) {
-		JPanel mainPn = new CreateJPanel().createPanel();
-		mainPn.setLayout(new FlowLayout());
-		JPanel northPn = new CreateJPanel().createPanel();
-		northPn.setLayout(new GridLayout(1, 1));
-		JPanel southPn = new CreateJPanel().createPanel();
-		southPn.setLayout(new GridLayout(1, 1));
-		northPn.setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
+		setLayout(new BorderLayout());
 		JTextPane screen = new JTextPane();
 		JLabel scoring = new JLabel();
+		scoring.setBackground(Color.decode("#8cb404"));
 		scoring.setHorizontalAlignment(JLabel.CENTER);
 		screen.setBackground(Color.decode("#8cb404"));
 		SimpleAttributeSet attribs = new SimpleAttributeSet();
@@ -51,21 +42,17 @@ public class Controller extends JPanel {
 		Snake snake = new Snake(3);
 		if (index == 0) {
 			sc = new DemoController(snake, field, screen, scoring, player);
+			add(MainBoard.demoControllerButtons[0], BorderLayout.SOUTH);
 		} else {
 			sc = new SnakeController(snake, field, screen, scoring, player);
 		}
 		sc.timer.start();
 		screen.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 		screen.addKeyListener(new SnakeListener(sc));
-		northPn.add(scoring, BorderLayout.CENTER);
-		southPn.add(screen);
-		mainPn.add(northPn);		
-		mainPn.add(southPn);
-		JPanel buttonPn = new CreateJPanel().createPanel();
-		for(int i = 0; i < MainBoard.snakeControllerButtons.length; i++) {
-			buttonPn.add(MainBoard.snakeControllerButtons[i]);
-		}
-		screen.add(buttonPn, BorderLayout.SOUTH);
-		return mainPn;
+		add(scoring, BorderLayout.NORTH);
+		add(screen);
+		MainBoard.setBoardPanel(this);
+		MainBoard.setGameOverPanel(this);
+		return this;
 	}
 }

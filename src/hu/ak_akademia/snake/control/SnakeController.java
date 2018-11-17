@@ -1,9 +1,12 @@
 package hu.ak_akademia.snake.control;
 
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -77,6 +80,10 @@ public class SnakeController extends JPanel implements ActionListener {
 		if (!end) {
 			screen.setText(board.toString());
 			scoring.setText(player.toString());
+		}else {
+			screen.remove(scoring);
+			revalidate();
+			repaint();
 		}
 	}
 
@@ -127,15 +134,19 @@ public class SnakeController extends JPanel implements ActionListener {
 		food.placeFood();
 	}
 
-	/**
-	 * TODO a scoring JLabel ott marad a gameOverPanelen, meg kell nézni miért!
-	 */
 	private void gameOver() {
 		end = true;
 		timer.stop();
-		screen.remove(scoring);
+		remove(scoring);
+		setVisible(false);
 		screen.add(new GameOverPanel(player).createPanel(MainBoard.gameOverButtons));
-		setVisible(true);
+		try {
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_SPACE);
+	        robot.keyRelease(KeyEvent.VK_SPACE);
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
 		revalidate();
 		repaint();
 	}

@@ -71,11 +71,11 @@ public class BestScore extends Score {
 	}
 
 	public void setBest(int mapNumber, int bestScore, String bestTime, String bestName) {
-		if (this.bestScore < 0) {
+		if (this.bestScore > 0) {
 			try {
 				Connection connect = new JDBC().buildConnection();
 				PreparedStatement statement = connect.prepareStatement(
-						"INSERT INTO SNEAK_HIGHSCORES (MAP_NO, BESTSCORE, BESTTIME, BESTNAME) VALUES (?,?,?,?)");
+						"INSERT INTO SNAKE_HIGHSCORES (MAP_NO, BESTSCORE, BESTTIME, BESTNAME) VALUES (?,?,?,?)");
 				statement.setString(1, String.valueOf(mapNumber));
 				statement.setString(2, String.valueOf(bestScore));
 				statement.setString(3, bestTime);
@@ -90,7 +90,7 @@ public class BestScore extends Score {
 			try {
 				Connection connect = new JDBC().buildConnection();
 				PreparedStatement statement = connect.prepareStatement(
-						"UPDATE SNEAK_HIGHSCORES SET BESTSCORE = ?, BESTTIME = ?, BESTNAME = ? WHERE MAP_NO = ?");
+						"UPDATE SNAKE_HIGHSCORES SET BESTSCORE = ?, BESTTIME = ?, BESTNAME = ? WHERE MAP_NO = ?");
 				statement.setString(1, String.valueOf(bestScore));
 				statement.setString(2, bestTime);
 				statement.setString(3, bestName);

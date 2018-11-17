@@ -1,15 +1,16 @@
 package hu.ak_akademia.snake.control;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
-import hu.ak_akademia.snake.gameboard.Buttons;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
@@ -19,12 +20,8 @@ import hu.ak_akademia.snake.model.Snake;
 public class DemoController extends SnakeController implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private JButton btExit = new JButton();
 	public DemoController(Snake snake, Board board, JTextPane screen, JLabel scoring, Player player) {
 		super(snake, board, screen, scoring, player);
-		btExit = new Buttons().createButton("resources/pictures/buttons/exit.png");
-		btExit.setFocusable(true);
-		btExit.addActionListener(this);
 	}
 
 	@Override
@@ -42,12 +39,9 @@ public class DemoController extends SnakeController implements ActionListener {
 		snakeMovever();
 		screen.setText(board.toString());
 		scoring.setText(player.toString());
-		if(e.getSource().equals(btExit)) {
-			setVisible(false);
-			System.exit(0);
-		}
 	}
 
+	@Override
 	public void snakeMovever() {
 		int[] nextFieldCoors = getNextFieldCoors();
 		switch (checkNextField()) {
@@ -108,13 +102,21 @@ public class DemoController extends SnakeController implements ActionListener {
 		player.setPoint(player.getPoint() + 1);
 		snake.eat();
 		food.placeFood();
-
 	}
 
-	private void gameOver() {
+	public void gameOver() {
 		end = true;
 		timer.stop();
-		screen.setText("Game Over!");
+		setVisible(false);
+		try {
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_SPACE);
+	        robot.keyRelease(KeyEvent.VK_SPACE);
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
+		revalidate();
+		repaint();
 	}
 
 	private FieldState checkNextField() {
