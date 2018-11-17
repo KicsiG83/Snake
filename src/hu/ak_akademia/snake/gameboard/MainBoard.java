@@ -237,13 +237,6 @@ public class MainBoard extends JFrame {
 				jPanelController(gameOverPanel, mainPanel);
 			}
 		});
-		btGameOverOk.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				jPanelController(??, gameOverPanel);//Neharagudj Geri de ezt nem értem
-			}
-			
-		});
 		snakeControllerReturn.addActionListener(new ActionListener() {
 			
 			@Override
