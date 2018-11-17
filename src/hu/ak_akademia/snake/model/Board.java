@@ -21,21 +21,21 @@ public class Board {
 			for (int j = 0; j < coloum; j++) {
 				if (map[i][j] == ' ') {
 					fields[i][j] = (BoardItem.NO_ITEM);
-				} else if (map[i][j] == '+') {
+				} else if (map[i][j] == '|') {
 					fields[i][j] = (BoardItem.VERTICAL_WALL);
-				} else if (map[i][j] == '+') {
+				} else if (map[i][j] == '-') {
 					fields[i][j] = (BoardItem.HORIZONTAL_WALL);
 				} else if (map[i][j] == '+') {
 					fields[i][j] = (BoardItem.CORNER);
-				} else if (map[i][j] == '+') {
-					fields[i][j] = (BoardItem.TOP_LEFT_CORNER);
-				} else if (map[i][j] == '+') {
-					fields[i][j] = (BoardItem.TOP_RIGHT_CORNER);
-				} else if (map[i][j] == '+') {
-					fields[i][j] = (BoardItem.BOTTOM_LEFT_CORNER);
-				} else if (map[i][j] == '+') {
-					fields[i][j] = (BoardItem.BOTTOM_RIGHT_CORNER);
-				} else if (map[i][j] == '▓') {
+			//	} else if (map[i][j] == 'X') {
+			//		fields[i][j] = (BoardItem.TOP_LEFT_CORNER);
+			//	} else if (map[i][j] == 'X') {
+			//		fields[i][j] = (BoardItem.TOP_RIGHT_CORNER);
+			//	} else if (map[i][j] == 'X') {
+			//		fields[i][j] = (BoardItem.BOTTOM_LEFT_CORNER);
+			//	} else if (map[i][j] == 'X') {
+			//		fields[i][j] = (BoardItem.BOTTOM_RIGHT_CORNER);
+				} else if (map[i][j] == 'X') {
 					fields[i][j] = (BoardItem.FIELD_WALL);
 				}
 			}

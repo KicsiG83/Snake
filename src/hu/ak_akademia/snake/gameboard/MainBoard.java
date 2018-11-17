@@ -132,7 +132,7 @@ public class MainBoard extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(1);
-				boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+				boardPanel = callController("resources/boards/Board1.txt", 1);
 				jPanelController(gameSelectMainPanel, boardPanel);
 			}
 		});
@@ -141,7 +141,7 @@ public class MainBoard extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(2);
-				boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+				boardPanel = callController("resources/boards/Board2.txt", 1);
 				jPanelController(gameSelectMainPanel, boardPanel);
 			}
 		});
@@ -150,7 +150,7 @@ public class MainBoard extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(3);
-				boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+				boardPanel = callController("resources/boards/Board3.txt", 1);
 				jPanelController(gameSelectMainPanel, boardPanel);
 			}
 		});
@@ -159,7 +159,7 @@ public class MainBoard extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(4);
-				boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+				boardPanel = callController("resources/boards/Board4.txt", 1);
 				jPanelController(gameSelectMainPanel, boardPanel);
 			}
 		});
@@ -168,7 +168,7 @@ public class MainBoard extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(5);
-				boardPanel = callController("resources/boards/emptyBoard.txt", 1);
+				boardPanel = callController("resources/boards/Board5.txt", 1);
 				jPanelController(gameSelectMainPanel, boardPanel);
 			}
 		});

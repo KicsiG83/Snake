@@ -1,0 +1,35 @@
++--------------------------------------------------------------------+
+|       X                          X                                 |
+|                             X         X                            |
+|                                  X                                 |
+|      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    X|
+|      X                                                       X     |
+|      X                           X                           X     |
+|      X                           X                           X     |
+|      X                           XXXXXXXXXXXXXXXXXXXXXXXX          |
+|X                 XXX             X                           XX    |
+|                                  X                      XXXXXX     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                           X     |
+|                                  X                      XXXXXX     |
+|X                XXX              X                           XX    |
+|     X                            XXXXXXXXXXXXXXXXXXXXXX            |
+|     X                            X                           X     |
+|     X                            X                           X     |
+|     X                                                        X     |
+|     XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    X|
+|                                  X                                 |
+|                             X         X                            |
+|     X                            X                                 |
++--------------------------------------------------------------------+
