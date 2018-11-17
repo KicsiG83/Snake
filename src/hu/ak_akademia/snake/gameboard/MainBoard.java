@@ -108,7 +108,7 @@ public class MainBoard extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(0);
-				jPanelController(mainPanel, callController("resources/boards/demoBoard.txt", 0));
+				jPanelController(mainPanel, callController("resources/boards/Board1.txt", 0));
 			}
 		});
 		btScores.addActionListener(new ActionListener() {
