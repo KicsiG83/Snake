@@ -102,7 +102,7 @@ public class GameOverPanel extends JPanel implements JPanelController {
 	}
 	
 	private boolean checkNewHighscore(Player player) {
-		Score playerScore = new Score(player.getPoint(), player.getTime());
+		Score playerScore = new Score(player.getPoint(), player.getTimeInSeconds());
 		Score highScore = new BestScore(player.getSelectedBoard());
 		boolean highscore = false;
 		switch (highScore.compareTo(playerScore)) {

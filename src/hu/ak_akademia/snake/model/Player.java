@@ -2,7 +2,10 @@ package hu.ak_akademia.snake.model;
 
 public class Player {
 
-	private int time;
+	private int timeInSeconds;
+	private int minutes;
+	private int seconds;
+	private String time;
 	private int point;
 	private long startTime = System.currentTimeMillis();
 	private int selectedBoard;
@@ -11,7 +14,7 @@ public class Player {
 	public Player(int boardIndex) {
 		selectedBoard = boardIndex;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -24,7 +27,11 @@ public class Player {
 		return selectedBoard;
 	}
 
-	public int getTime() {
+	public int getTimeInSeconds() {
+		return timeInSeconds;
+	}
+
+	public String getTime() {
 		return time;
 	}
 
@@ -38,7 +45,28 @@ public class Player {
 
 	@Override
 	public String toString() {
-		time = (int) ((System.currentTimeMillis() - startTime) / 1000);
-		return "Time: " + time + "s Points: " + point;
+
+		return "Idő: " + convertSecondsIntoTime() + " Pont: " + point;
+	}
+
+	private String convertSecondsIntoTime() {
+		timeInSeconds = (int) ((System.currentTimeMillis() - startTime) / 1000);
+		minutes = timeInSeconds / 60;
+		seconds = timeInSeconds - (minutes * 60);
+		if (minutes < 10) {
+			if (seconds < 10) {
+				time = "0" + minutes + ":0" + seconds;
+			} else {
+				time = "0" + minutes + ":" + seconds;
+			}
+		} else {
+			if (seconds < 10) {
+				time = minutes + ":0" + seconds;
+			} else {
+				time = minutes + ":" + seconds;
+			}
+
+		}
+		return time;
 	}
 }

@@ -193,7 +193,7 @@ public class MainBoard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				player.setName(GameOverPanel.getPlayerNameTF());
 				new BestScore().setBest(player.getSelectedBoard(), player.getPoint(),
-						Integer.toString(player.getTime()), player.getName());
+						player.getTime(), player.getName());
 				jPanelController(gameOverPanel, mainPanel);
 			}
 		});
