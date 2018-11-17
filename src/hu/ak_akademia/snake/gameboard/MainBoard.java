@@ -33,7 +33,7 @@ public class MainBoard extends JFrame {
 	private final JButton btScoreReturn = new Buttons().createButton("resources/pictures/buttons/return.png");
 	private static JButton btGameOverOk = new Buttons().createButton("resources/pictures/buttons/ok.png");
 	private static JButton btGameOverExit = new Buttons().createButton("resources/pictures/buttons/gameOverExit.png");
-	private static JButton btGameOverReturn = new Buttons().createButton("resources/pictures/buttons/return.png");
+	private static JButton btGameOverReturn = new Buttons().createButton("resources/pictures/buttons/gameOverReturn.png");
 	private static JButton snakeControllerReturn = new Buttons().createButton("resources/pictures/buttons/return.png");
 	private static JButton snakeControllerExit = new Buttons().createButton("resources/pictures/buttons/exit.png");
 	public static final JButton[] mainButtons = { btGame, btDemo, btScores, btExit };
@@ -44,8 +44,8 @@ public class MainBoard extends JFrame {
 	private JPanel mainPanel = new JPanel();
 	private JPanel scorePanel = new JPanel();
 	private JPanel gameSelectMainPanel = new JPanel();
-	private JPanel boardPanel = new JPanel();
-	private JPanel gameOverPanel = new JPanel();
+	private static JPanel boardPanel = new JPanel();
+	private static JPanel gameOverPanel = new JPanel();
 
 	public MainBoard() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -63,10 +63,17 @@ public class MainBoard extends JFrame {
 		setVisible(true);
 	}
 
+	public static void setGameOverPanel(JPanel gOverPanel) {
+		gameOverPanel = gOverPanel;
+	}
+
+	public static void setBoardPanel(JPanel bPanel) {
+		boardPanel = bPanel;
+	}
+
 	private void setJpanels() {
 		mainPanel = new MainPanel().createPanel(mainButtons);
 		gameSelectMainPanel = new GameSelectPanel().createPanel(boardButtons);
-		scorePanel = new ScoresPanel().createPanel(scoreButton);
 	}
 
 	private void jPanelController(JPanel oldPanel, JPanel newPanel) {
@@ -108,6 +115,7 @@ public class MainBoard extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				scorePanel = new ScoresPanel().createPanel(scoreButton);
 				jPanelController(mainPanel, scorePanel);
 			}
 		});
@@ -196,13 +204,19 @@ public class MainBoard extends JFrame {
 				jPanelController(gameOverPanel, mainPanel);
 			}
 		});
+		btGameOverExit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				System.exit(0);
+			}
+		});
 		snakeControllerReturn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				jPanelController(boardPanel, mainPanel);
-				revalidate();
-				repaint();
 			}
 		});
 		snakeControllerExit.addActionListener(new ActionListener() {

@@ -81,6 +81,7 @@ public class SnakeController extends JPanel implements ActionListener {
 			screen.setText(board.toString());
 			scoring.setText(player.toString());
 		}else {
+			screen.remove(scoring);
 			revalidate();
 			repaint();
 		}

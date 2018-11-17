@@ -11,8 +11,6 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
-import hu.ak_akademia.snake.gameboard.MainBoard;
-import hu.ak_akademia.snake.gameboard.MainPanel;
 import hu.ak_akademia.snake.model.Board;
 import hu.ak_akademia.snake.model.Direction;
 import hu.ak_akademia.snake.model.FieldState;
@@ -43,6 +41,7 @@ public class DemoController extends SnakeController implements ActionListener {
 		scoring.setText(player.toString());
 	}
 
+	@Override
 	public void snakeMovever() {
 		int[] nextFieldCoors = getNextFieldCoors();
 		switch (checkNextField()) {
@@ -105,17 +104,10 @@ public class DemoController extends SnakeController implements ActionListener {
 		food.placeFood();
 	}
 
-	/**
-	 * TODO 
-	 * A leállást követően vagy még előtte vizsgálni kell a vissza gombot! 
-	 * Cél a főmenü!
-	 */
 	public void gameOver() {
 		end = true;
 		timer.stop();
 		setVisible(false);
-		removeAll();
-		screen.add(new MainPanel().createPanel(MainBoard.mainButtons));
 		try {
 			Robot robot = new Robot();
 			robot.keyPress(KeyEvent.VK_SPACE);
@@ -125,7 +117,6 @@ public class DemoController extends SnakeController implements ActionListener {
 		}
 		revalidate();
 		repaint();
-		
 	}
 
 	private FieldState checkNextField() {

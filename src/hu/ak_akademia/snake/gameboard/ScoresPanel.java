@@ -42,7 +42,7 @@ public class ScoresPanel extends JPanel implements JPanelController {
 		pn.setLayout(new GridLayout(3, 1));
 		pn.add(new JLabel(new ImageIcon("resources/pictures/background/snakeMainPicture.png")), BorderLayout.NORTH);
 		pn.add(headerPn);
-		pn.add(createMainPanel(10, 4, buttons), BorderLayout.SOUTH);
+		pn.add(createMainPanel(5, 4, buttons), BorderLayout.SOUTH);
 		return pn;
 	}
 

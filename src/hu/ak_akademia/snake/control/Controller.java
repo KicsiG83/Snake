@@ -51,6 +51,8 @@ public class Controller extends JPanel {
 		screen.addKeyListener(new SnakeListener(sc));
 		add(scoring, BorderLayout.NORTH);
 		add(screen);
+		MainBoard.setBoardPanel(this);
+		MainBoard.setGameOverPanel(this);
 		return this;
 	}
 }

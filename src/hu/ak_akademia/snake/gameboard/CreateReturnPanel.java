@@ -1,6 +1,7 @@
 package hu.ak_akademia.snake.gameboard;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -20,14 +21,8 @@ public class CreateReturnPanel implements JPanelController {
 	}
 
 	public JPanel createPanel(JButton[] buttons, int index) {
-		int maxRow;
-		if (index == 0) {
-			maxRow = 3;
-		} else {
-			maxRow = 2;
-		}
 		JPanel pn = new CreateJPanel().createPanel();
-		pn.setLayout(new GridLayout(maxRow, 1, 5, 10));
+		pn.setLayout(new FlowLayout());
 		for (int i = index; i < buttons.length; i++) {
 			pn.add(buttons[i]);
 		}
@@ -38,5 +33,4 @@ public class CreateReturnPanel implements JPanelController {
 	public JPanel createMainPanel(int row, int column, JButton[] buttons) {
 		return null;
 	}
-
 }
