@@ -22,10 +22,10 @@ public class Snake {
 
 	public void eat() {
 		length++;
-		incrase(getLastPiece());
+		increase(getLastPiece());
 	}
 
-	private void incrase(SnakePiece piece) {
+	private void increase(SnakePiece piece) {
 		SnakePiece newPiece = new SnakePiece(BoardItem.SNAKE_BODY, null);
 		piece.setPointer(newPiece);
 	}

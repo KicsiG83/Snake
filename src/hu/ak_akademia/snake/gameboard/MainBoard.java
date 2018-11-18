@@ -76,7 +76,7 @@ public class MainBoard extends JFrame {
 		gameSelectMainPanel = new GameSelectPanel().createPanel(boardButtons);
 	}
 
-	private void jPanelController(JPanel oldPanel, JPanel newPanel) {
+	private void changeJPanel(JPanel oldPanel, JPanel newPanel) {
 		remove(oldPanel);
 		add(newPanel);
 		repaint();
@@ -100,7 +100,7 @@ public class MainBoard extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				jPanelController(mainPanel, gameSelectMainPanel);
+				changeJPanel(mainPanel, gameSelectMainPanel);
 			}
 		});
 		btDemo.addActionListener(new ActionListener() {
@@ -108,7 +108,7 @@ public class MainBoard extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(0);
-				jPanelController(mainPanel, callController("resources/boards/Board1.txt", 0));
+				changeJPanel(mainPanel, callController("resources/boards/Board1.txt", 0));
 			}
 		});
 		btScores.addActionListener(new ActionListener() {
@@ -116,7 +116,7 @@ public class MainBoard extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				scorePanel = new ScoresPanel().createPanel(scoreButton);
-				jPanelController(mainPanel, scorePanel);
+				changeJPanel(mainPanel, scorePanel);
 			}
 		});
 		btExit.addActionListener(new ActionListener() {
@@ -133,7 +133,7 @@ public class MainBoard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(1);
 				boardPanel = callController("resources/boards/Board1.txt", 1);
-				jPanelController(gameSelectMainPanel, boardPanel);
+				changeJPanel(gameSelectMainPanel, boardPanel);
 			}
 		});
 		btBoard2.addActionListener(new ActionListener() {
@@ -142,7 +142,7 @@ public class MainBoard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(2);
 				boardPanel = callController("resources/boards/Board2.txt", 1);
-				jPanelController(gameSelectMainPanel, boardPanel);
+				changeJPanel(gameSelectMainPanel, boardPanel);
 			}
 		});
 		btBoard3.addActionListener(new ActionListener() {
@@ -151,7 +151,7 @@ public class MainBoard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(3);
 				boardPanel = callController("resources/boards/Board3.txt", 1);
-				jPanelController(gameSelectMainPanel, boardPanel);
+				changeJPanel(gameSelectMainPanel, boardPanel);
 			}
 		});
 		btBoard4.addActionListener(new ActionListener() {
@@ -160,7 +160,7 @@ public class MainBoard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(4);
 				boardPanel = callController("resources/boards/Board4.txt", 1);
-				jPanelController(gameSelectMainPanel, boardPanel);
+				changeJPanel(gameSelectMainPanel, boardPanel);
 			}
 		});
 		btBoard5.addActionListener(new ActionListener() {
@@ -169,21 +169,21 @@ public class MainBoard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(5);
 				boardPanel = callController("resources/boards/Board5.txt", 1);
-				jPanelController(gameSelectMainPanel, boardPanel);
+				changeJPanel(gameSelectMainPanel, boardPanel);
 			}
 		});
 		btReturn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				jPanelController(gameSelectMainPanel, mainPanel);
+				changeJPanel(gameSelectMainPanel, mainPanel);
 			}
 		});
 		btScoreReturn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				jPanelController(scorePanel, mainPanel);
+				changeJPanel(scorePanel, mainPanel);
 				repaint();
 			}
 		});
@@ -194,14 +194,14 @@ public class MainBoard extends JFrame {
 				player.setName(GameOverPanel.getPlayerNameTF());
 				new BestScore().setBest(player.getSelectedBoard(), player.getPoint(),
 						player.getTime(), player.getName());
-				jPanelController(gameOverPanel, mainPanel);
+				changeJPanel(gameOverPanel, mainPanel);
 			}
 		});
 		btGameOverReturn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				jPanelController(gameOverPanel, mainPanel);
+				changeJPanel(gameOverPanel, mainPanel);
 			}
 		});
 		btGameOverExit.addActionListener(new ActionListener() {
@@ -216,7 +216,7 @@ public class MainBoard extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				jPanelController(boardPanel, mainPanel);
+				changeJPanel(boardPanel, mainPanel);
 			}
 		});
 		snakeControllerExit.addActionListener(new ActionListener() {
