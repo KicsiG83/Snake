@@ -2,8 +2,6 @@ package hu.ak_akademia.snake.gameboard;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,7 +31,8 @@ public class MainBoard extends JFrame {
 	private final JButton btScoreReturn = new Buttons().createButton("resources/pictures/buttons/return.png");
 	private static JButton btGameOverOk = new Buttons().createButton("resources/pictures/buttons/ok.png");
 	private static JButton btGameOverExit = new Buttons().createButton("resources/pictures/buttons/gameOverExit.png");
-	private static JButton btGameOverReturn = new Buttons().createButton("resources/pictures/buttons/gameOverReturn.png");
+	private static JButton btGameOverReturn = new Buttons()
+			.createButton("resources/pictures/buttons/gameOverReturn.png");
 	private static JButton snakeControllerReturn = new Buttons().createButton("resources/pictures/buttons/return.png");
 	private static JButton snakeControllerExit = new Buttons().createButton("resources/pictures/buttons/exit.png");
 	public static final JButton[] mainButtons = { btGame, btDemo, btScores, btExit };
@@ -96,136 +95,69 @@ public class MainBoard extends JFrame {
 	}
 
 	private void addActionListenerToButtons() {
-		btGame.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changeJPanel(mainPanel, gameSelectMainPanel);
-			}
+		btGame.addActionListener(even -> changeJPanel(mainPanel, gameSelectMainPanel));
+		btDemo.addActionListener(even -> {
+			player = new Player(0);
+			changeJPanel(mainPanel, callController("resources/boards/Board1.txt", 0));
 		});
-		btDemo.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				player = new Player(0);
-				changeJPanel(mainPanel, callController("resources/boards/Board1.txt", 0));
-			}
+		btScores.addActionListener(even -> {
+			scorePanel = new ScoresPanel().createPanel(scoreButton);
+			changeJPanel(mainPanel, scorePanel);
 		});
-		btScores.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				scorePanel = new ScoresPanel().createPanel(scoreButton);
-				changeJPanel(mainPanel, scorePanel);
-			}
+		btExit.addActionListener(even -> {
+			setVisible(false);
+			System.exit(0);
 		});
-		btExit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				System.exit(0);
-			}
+		btBoard1.addActionListener(even -> {
+			player = new Player(1);
+			boardPanel = callController("resources/boards/Board1.txt", 1);
+			changeJPanel(gameSelectMainPanel, boardPanel);
 		});
-		btBoard1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				player = new Player(1);
-				boardPanel = callController("resources/boards/Board1.txt", 1);
-				changeJPanel(gameSelectMainPanel, boardPanel);
-			}
+		btBoard2.addActionListener(even -> {
+			player = new Player(2);
+			boardPanel = callController("resources/boards/Board2.txt", 1);
+			changeJPanel(gameSelectMainPanel, boardPanel);
 		});
-		btBoard2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				player = new Player(2);
-				boardPanel = callController("resources/boards/Board2.txt", 1);
-				changeJPanel(gameSelectMainPanel, boardPanel);
-			}
+		btBoard3.addActionListener(even -> {
+			player = new Player(3);
+			boardPanel = callController("resources/boards/Board3.txt", 1);
+			changeJPanel(gameSelectMainPanel, boardPanel);
 		});
-		btBoard3.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				player = new Player(3);
-				boardPanel = callController("resources/boards/Board3.txt", 1);
-				changeJPanel(gameSelectMainPanel, boardPanel);
-			}
+		btBoard4.addActionListener(even -> {
+			player = new Player(4);
+			boardPanel = callController("resources/boards/Board4.txt", 1);
+			changeJPanel(gameSelectMainPanel, boardPanel);
 		});
-		btBoard4.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				player = new Player(4);
-				boardPanel = callController("resources/boards/Board4.txt", 1);
-				changeJPanel(gameSelectMainPanel, boardPanel);
-			}
+		btBoard5.addActionListener(even -> {
+			player = new Player(5);
+			boardPanel = callController("resources/boards/Board5.txt", 1);
+			changeJPanel(gameSelectMainPanel, boardPanel);
 		});
-		btBoard5.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				player = new Player(5);
-				boardPanel = callController("resources/boards/Board5.txt", 1);
-				changeJPanel(gameSelectMainPanel, boardPanel);
-			}
+		btReturn.addActionListener(even -> {
+			changeJPanel(gameSelectMainPanel, mainPanel);
 		});
-		btReturn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changeJPanel(gameSelectMainPanel, mainPanel);
-			}
+		btScoreReturn.addActionListener(even -> {
+			changeJPanel(scorePanel, mainPanel);
+			repaint();
 		});
-		btScoreReturn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changeJPanel(scorePanel, mainPanel);
-				repaint();
-			}
+		btGameOverOk.addActionListener(even -> {
+			player.setName(GameOverPanel.getPlayerNameTF());
+			new BestScore().setBest(player.getSelectedBoard(), player.getPoint(), player.getTime(), player.getName());
+			changeJPanel(gameOverPanel, mainPanel);
 		});
-		btGameOverOk.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				player.setName(GameOverPanel.getPlayerNameTF());
-				new BestScore().setBest(player.getSelectedBoard(), player.getPoint(),
-						player.getTime(), player.getName());
-				changeJPanel(gameOverPanel, mainPanel);
-			}
+		btGameOverReturn.addActionListener(even -> {
+			changeJPanel(gameOverPanel, mainPanel);
 		});
-		btGameOverReturn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changeJPanel(gameOverPanel, mainPanel);
-			}
+		btGameOverExit.addActionListener(even -> {
+			setVisible(false);
+			System.exit(0);
 		});
-		btGameOverExit.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				System.exit(0);
-			}
+		snakeControllerReturn.addActionListener(even -> {
+			changeJPanel(boardPanel, mainPanel);
 		});
-		snakeControllerReturn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changeJPanel(boardPanel, mainPanel);
-			}
-		});
-		snakeControllerExit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				System.exit(0);
-			}
+		snakeControllerExit.addActionListener(e -> {
+			setVisible(false);
+			System.exit(0);
 		});
 	}
 }
